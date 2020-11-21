@@ -2,8 +2,8 @@ NAME = maps
 SRCS = main.c draw.c nodes.c
 OBJS = main.o draw.o nodes.o
 
-SDL_LIB = -L SDL2/lib -lSDL2
-IMG_LIB = -L SDL2/lib -lSDL2_image
+SDL_LIB = -L ../SDL2/lib -lSDL2
+IMG_LIB = -L ../SDL2/lib -lSDL2_image
 
 all: $(NAME)
 

@@ -113,8 +113,8 @@ void draw_grid(t_map *mp)
 	}
 	// draw_point(mp, mp->z_x, mp->z_y, 255);
 	draw_nodes(mp);
-	// if (mp->click)
-	// 	draw_pr(mp, mp->x_clck, mp->y_clck, 150);
+	if (mp->click)
+		draw_pr(mp, mp->x_clck, mp->y_clck, 150);
 	// draw_panel(mp);
 	SDL_UpdateWindowSurface(mp->win);
 }
@@ -194,7 +194,7 @@ int		mkey(int key, int x, int y, t_map *mp)
 			// draw_line(mp, x, y);
 			mp->click = 0;
 			// if (mp->sh == 0)
-				// find_coord(mp, &x1, &y1);
+			// 	find_coord(mp, &x1, &y1);
 			add_node(mp, x, y);
 		}
 		
@@ -216,11 +216,9 @@ int init(t_map *mp, char **av)
 	if (!(mp->img = SDL_GetWindowSurface(mp->win)))
 		return (1);
 	init_texture(mp->img, &(mp->s), &(mp->pixb), &(mp->strb), &(mp->amask));
-	printf("AMASK %u\n", mp->amask);
-	mp->img1 = IMG_Load("inpanel2.png");
+	mp->img1 = IMG_Load("the_God.jpg");
 	mp->img1 = SDL_ConvertSurfaceFormat(mp->img1, SDL_PIXELFORMAT_BGRA32, 0);
 	init_texture(mp->img1, &(mp->s1), &(mp->pixb1), &(mp->strb1), &(mp->amask1));
-	printf("AMASK1 %u\n", mp->amask1);
 	mp->z_x = WIDTH / 2;
 	mp->z_y = HEIGHT / 2;
 	mp->click = 0;

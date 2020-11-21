@@ -18,7 +18,7 @@ void	find_coord(t_map *mp, double *x, double *y)
 	y1 = *y + 5;
 	abs = 50.;
 	if (!nod)
-		return;
+		return ;
 	while (nod)
 	{
 		if (fabs(nod->x1 - *x) < 0.3 && fabs(nod->y1 - *y) < 0.3)

@@ -28,20 +28,36 @@ void draw_pr(t_map *mp, int x, int y, unsigned char c)
 
 void draw_node(t_map *mp, t_nod *n)
 {
-	int x1 = n->x1 + mp->z_x;
-	int x2 = n->x2 + mp->z_x;
+	int x1;
+	int y1;
+	int x2;
+	int y2;
+
+	int dx;
+	int dy;
+	int er;
+	int de;
+
+	int i;
+	int j;
+
+	int diry;
+	int di;
+
+	x1 = n->x1 + mp->z_x;
+	x2 = n->x2 + mp->z_x;
 	if (x1 < 0 && x2 < 0)
 		return;
-	int y1 = n->y1 + mp->z_y;
-	int y2 = n->y2 + mp->z_y;
-	int dx = abs(x1 - x2);
-	int dy = abs(y1 - y2);
-	int er = 0;
-	int de = dy + 1;
-	int j = y1;
-	int diry;
-	int i = x1;
-	int di = 0;
+	y1 = n->y1 + mp->z_y;
+	y2 = n->y2 + mp->z_y;
+	dx = abs(x1 - x2);
+	dy = abs(y1 - y2);
+	er = 0;
+	de = dy + 1;
+	j = y1;
+	i = x1;
+	di = 0;
+	
 	if (dx > dy)
 	{
 		i = x1;

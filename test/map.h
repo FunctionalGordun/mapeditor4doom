@@ -19,7 +19,7 @@ typedef struct		s_nod
 	short				y1;
 	short				x2;
 	short				y2;
-	struct s_nod	*nxt;
+	struct s_nod		*nxt;
 }					t_nod;
 
 typedef struct	s_map

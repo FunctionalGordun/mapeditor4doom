@@ -36,7 +36,11 @@ int		init_all(t_map *map)
 
 	// 	map->img6 = SDL_ConvertSurfaceFormat(map->img6, SDL_PIXELFORMAT_BGRA32, 0);
 	// init_texture(map->img6, &(map->s6), &(map->pixb6), &(map->strb6));
-
+	map->z_x = WIDTH / 2;
+	map->z_y = HEIGHT / 2;
+	map->click = 0;
+	map->nod = NULL;
+	map->sh = 0;
 
 	return (0);
 }
