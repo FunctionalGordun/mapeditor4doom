@@ -15,11 +15,12 @@
 // #include <SDL2/SDL.h>
 // #include "SDL.h"
 
-# define APPLEGREY (t_color){125, 125, 125}
+# define APPLEGREY (t_color){33, 33, 33}
+# define GREY (t_color){74, 74, 74}
 # define WHITE (t_color){255, 255, 255}
-# define LIMONCHIFFON (t_color){255, 250, 205}
 # define RED (t_color){255, 0, 0}
 # define GREEN (t_color){0, 255, 0}
+
 
 # define WIDTH 1224
 # define HEIGHT 820
@@ -41,14 +42,14 @@ typedef struct	s_plr
 
 }				t_plr;
 
-typedef struct		s_nod
+typedef struct			s_nod
 {
 	short				x1;
 	short				y1;
 	short				x2;
 	short				y2;
 	struct s_nod		*nxt;
-}					t_nod;
+}						t_nod;
 
 typedef struct	s_btn
 {
@@ -75,18 +76,14 @@ SDL_Surface			*img;
 unsigned char		*s;
 unsigned char		pixb;
 int					strb;
+int					active;
 }					t_image;
 
 typedef struct	s_map
 {
 	SDL_Window			*win;
-
-	// t_interface			*interface;
-	t_image				*inter_tex[9];
+	t_image				*inter_tex[10];
 	t_nod				*nod;
-	// t_image				*tools_tex[4];
-	// t_plr				plr;
-	// int					nb;
 
 	int					z_x;
 	int					z_y;
@@ -95,6 +92,9 @@ typedef struct	s_map
 	int y_clck;
 	int sh;
 	int fd;
+
+	int x_c;
+	int y_c;
 	
 
 }				t_map;
@@ -119,17 +119,32 @@ void	draw_nodes(t_map *map);
 void	draw_node(t_map *map, t_nod *n);
 void	add_node(t_map *mp, int x, int y);
 void	draw_pr(t_map *map, int x, int y, unsigned char c);
-void	draw_gr(t_map *map, int x, int y, unsigned char c);
+void	draw_gr(t_map *map, int x, int y, t_color color);
+
+void	find_coord(t_map *mp, int *x, int *y);
+int		sq(int x1, int y1, int x2, int y2);
 
 t_nod	*n_cr(short x1, short y1, short x2, short y2);
 
 
 void	events(t_map *map);
+int		mmove(int x, int y, t_map *map, SDL_Event event);
+
+
+int pix_range(t_map *map, int x, int y);///////////////
 
 int		ukey(int key, t_map *map);
 int		pkey(int key, t_map *map);
 int		mkey(int key, int x, int y, t_map *map);
 
+
+void	edit_tool(t_map *map, int index);
+void	wall_editor(t_map *map, int x, int y);
+
+int		interface_click(t_map *map, int x, int y);
+
+
+void bigdot(t_map *map, int x, int y, t_color color);
 
 
 // void turn_btn(t_btn *b);

@@ -88,7 +88,7 @@ void draw_grid(t_map *mp)
 		}
 	}
 	draw_point(mp, mp->z_x, mp->z_y, 255);
-		draw_nodes(mp);
+	draw_nodes(mp);
 	if (mp->click)
 		draw_pr(mp, (mp->x_c * mp->scale) + mp->z_x, (mp->y_c * mp->scale) + mp->z_y, 150);
 	// draw_point(mp, mp->z_x + mp->scale, mp->z_y + mp->scale, 255);
@@ -146,7 +146,25 @@ int		mmove(int x, int y, t_map *mp)
 	return (0);
 }
 
-int		mkey(int key, int x, int y, t_map *mp)
+void bigdot(t_map *map, int x, int y)
+{
+	int i;
+	int j;
+
+	i = 0;
+	while (i < 4)
+	{
+		j = 0;
+		while (j < 4)
+		{
+			draw_point(map, x + i, y + j, 250);
+			j++;
+		}
+		i++;
+	}
+}
+
+int		mkey(int key, int x, int y, t_map *map)
 {
 	double x1;
 	double y1;
@@ -157,6 +175,7 @@ int		mkey(int key, int x, int y, t_map *mp)
 		{
 
 			draw_point(mp, x, y, 250);
+			bigdot(map, x, y);
 			mp->x_clck = x;
 			mp->y_clck = y;
 			mp->click = 1;

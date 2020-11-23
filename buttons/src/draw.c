@@ -96,6 +96,23 @@ void draw_pixel(t_map *map, int x, int y, t_color color)
 		draw_color(map, pixel, color);
 	}
 }
+void bigdot(t_map *map, int x, int y, t_color color)
+{
+	int i;
+	int j;
+
+	i = 0;
+	while (i < 3)
+	{
+		j = 0;
+		while (j < 3)
+		{
+			draw_point(map, x + i, y + j, color);
+			j++;
+		}
+		i++;
+	}
+}
 
 void draw_point(t_map *map, int x, int y, t_color color)
 {
@@ -132,7 +149,7 @@ void draw_grid(t_map *map)
 		while (j < WIDTH)
 		{
 			if ((i - map->z_y) % SCALE == 0 && (j - map->z_x) % SCALE == 0)
-				draw_point(map, j, i, LIMONCHIFFON);
+				draw_point(map, j, i, GREY);
 			else if ((i - map->z_y) % SCALE == 0 || (j - map->z_x) % SCALE == 0)
 				draw_pixel(map, j, i, APPLEGREY);
 			else
@@ -142,8 +159,7 @@ void draw_grid(t_map *map)
 	}
 	draw_nodes(map);
 	if (map->click)
-		draw_pr(map, map->x_clck, map->y_clck, 150);
-	// SDL_UpdateWindowSurface(map->win);
+		bigdot(map, map->x_clck, map->y_clck, RED);
 }
 
 
@@ -162,6 +178,5 @@ void draw(t_map *map)
 	draw_img(map, 7, 130, 60, 30, 30);
 	draw_img(map, 8, 180, 60, 30, 30);
 
-	// draw_pl(map);
 	SDL_UpdateWindowSurface(map->win);
 }

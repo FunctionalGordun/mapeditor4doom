@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gordey <gordey@student.42.fr>              +#+  +:+       +#+         #
+#    By: grinko <grinko@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/07 17:20:11 by grinko            #+#    #+#              #
-#    Updated: 2020/11/04 14:19:14 by gordey           ###   ########.fr        #
+#    Updated: 2020/11/23 18:31:05 by grinko           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,4 +45,4 @@ clean:
 fclean: clean
 	@rm -rf $(NAME)
 
-re: @fclean all
+re: fclean all

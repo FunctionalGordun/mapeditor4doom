@@ -4,26 +4,19 @@ int		mkey(int key, int x, int y, t_map *map)
 {
 	if (key == 1)
 	{
-		if (map->click == 0)
+		if (map->inter_tex[6]->active)
 		{
-			draw_point(map, x, y, RED);
-			map->x_clck = x;
-			map->y_clck = y;
-			map->click = 1;
+			wall_editor(map, x, y);
 		}
-		else
+		if (map->inter_tex[8]->active)
 		{
-			map->click = 0;
-			add_node(map, x, y);
+			if (pix_range(map, x, y) && interface_click(map, x, y))
+			{
+				printf("Click!\n");
+			}
 		}
 		
 	}
-	// printf("%d\n", key);
-	if (key == 3)
-	{
-		// draw_img(map, x, y, 20, 20);
-	}
-	// draw_grid(map);
 	SDL_UpdateWindowSurface(map->win);
 	return (0);
 }

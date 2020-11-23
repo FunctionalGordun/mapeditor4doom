@@ -15,7 +15,7 @@ int main(int ac, char **av)
 
 	if (!(map = (t_map *)malloc(sizeof(t_map))))
 		return (0);
-	if(init_all(map))
+	if(!init_all(map))
 		i_error();
 	draw(map);
 	SDL_UpdateWindowSurface(map->win);

@@ -24,7 +24,7 @@ HEAD = $(HEAD_DIR)map.h
 INCLUDES = $(LIBFT_H) $(RTV1_H)
 
 SRC_DIR = src/
-SRC_FILES =		main.c draw.c hooks.c interface_init.c nodes.c event.c key.c
+SRC_FILES =		main.c draw.c hooks.c interface_init.c nodes.c event.c key.c tools.c
 
 OBJ_DIR = obj/
 OBJ_FILE =	$(SRC_FILES:.c=.o)
@@ -52,6 +52,17 @@ clean:
 	@$(MAKE) -sC $(LIBFT_DIR) clean
 	@rm -rf $(OBJ_DIR)
 	@echo "\033[35m \tclean \t\t\t\t finish \033[0m"
+	#   ,-.       _,---._ __  / \"
+	#  /  )    .-'       `./ /   \"
+	# (  (   ,'            `/    /|
+	#  \  `-"             \'\   / |
+	#   `.              ,  \ \ /  |
+	#    /`.          ,'-`----Y   |
+	#   (            ;        |   '
+	#   |  ,-.    ,-'         |  /
+	#   |  | (   |            | /
+	#   )  |  \  `.___________|/
+	#   `--'   `--'
 
 fclean: clean
 	@rm -f $(LIBFT)
