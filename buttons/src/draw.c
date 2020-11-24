@@ -26,58 +26,6 @@ void draw_img(t_map *map, int inx, int x, int y, int wdth, int hth)
 	}
 }
 
-// void draw_img(t_map *map, int inx, int x, int y, int wdth, int hth) --------- one struct
-// {
-// 	int i;
-// 	int j;
-// 	int pixel1;
-// 	int pixel2;
-
-// 	i = y;
-// 	while (i < HEIGHT && i < y + hth)
-// 	{
-// 		j = x;
-// 		while (j < WIDTH && j < x + wdth)
-// 		{
-			
-// 			pixel1 = i * map->strb + j * map->pixb;
-
-// 			pixel2 = (int)((double)(i-y)/hth * map->img2->h) * map->strb2 + (int)((double)(j - x)/wdth * map->img2->w) * map->pixb2;
-// 			map->s[pixel1] = map->s2[pixel2];
-// 			map->s[++pixel1] = map->s2[++pixel2];
-// 			map->s[++pixel1] = map->s2[++pixel2];
-// 			j++;
-// 		}
-// 		i++;
-// 	}
-// }
-
-// void draw_button(t_btn b, t_map *map)
-// {
-// 	int x = b.xpos;
-// 	int y = b.ypos;
-// 	int pixel;
-
-// 	y = b.ypos;
-// 	while (y < b.ypos + b.h)
-// 	{
-// 		x = b.xpos;
-// 		while (x < b.xpos + b.w)
-// 		{
-// 			pixel = (x * map->pixb) + (y * map->strb);
-// 			draw_color(map, pixel, b.color);
-// 			x++;
-// 		}
-// 		y++;
-// 	}
-// }
-
-// void	draw_img_pix(t_map *map, int pixel1, int pixel2)
-// {
-// 	map->s[pixel1] = map->b_s[pixel2];
-// 	map->s[++pixel1] = map->b_s[++pixel2];
-// 	map->s[++pixel1] = map->b_s[++pixel2];
-// }
 void	draw_color(t_map *map, int pixel, t_color color)
 {
 	map->inter_tex[0]->s[pixel] = color.b;
@@ -94,23 +42,6 @@ void draw_pixel(t_map *map, int x, int y, t_color color)
 	{
 		pixel = (x * map->inter_tex[0]->pixb) + (y * map->inter_tex[0]->strb);
 		draw_color(map, pixel, color);
-	}
-}
-void bigdot(t_map *map, int x, int y, t_color color)
-{
-	int i;
-	int j;
-
-	i = 0;
-	while (i < 3)
-	{
-		j = 0;
-		while (j < 3)
-		{
-			draw_point(map, x + i, y + j, color);
-			j++;
-		}
-		i++;
 	}
 }
 
@@ -137,6 +68,26 @@ void draw_point(t_map *map, int x, int y, t_color color)
 	}
 }
 
+
+void bigdot(t_map *map, int x, int y, t_color color)
+{
+	int i;
+	int j;
+
+	i = 0;
+	while (i < 3)
+	{
+		j = 0;
+		while (j < 3)
+		{
+			draw_point(map, x + i, y + j, color);
+			j++;
+		}
+		i++;
+	}
+}
+
+
 void draw_grid(t_map *map)
 {
 	int i;
@@ -157,9 +108,6 @@ void draw_grid(t_map *map)
 			j++;
 		}
 	}
-	draw_nodes(map);
-	if (map->click)
-		bigdot(map, map->x_clck, map->y_clck, RED);
 }
 
 
@@ -178,5 +126,9 @@ void draw(t_map *map)
 	draw_img(map, 7, 130, 60, 30, 30);
 	draw_img(map, 8, 180, 60, 30, 30);
 
+	if (map->click) ///начало
+		bigdot(map, map->x_clck, map->y_clck, RED);
+	draw_nodes(map);
+	//printf("x: %d y: %d x2: %d y2:%d\n", map->nod->x1, map->nod->y1, map->nod->x2, map->nod->y2);
 	SDL_UpdateWindowSurface(map->win);
 }

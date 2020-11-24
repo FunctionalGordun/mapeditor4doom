@@ -19,6 +19,11 @@ int		init_all(t_map *map)
 	map->click = 0;
 	map->nod = NULL;
 	map->sh = 0;
+
+	map->removeindx = 0;
+	// map->removeflag2 = 0;
+	// map->nod = (t_nod*)malloc(sizeof(t_nod));
+	// map->nod->index = 0;
 	return (1);
 }
 

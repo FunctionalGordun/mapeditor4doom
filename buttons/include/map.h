@@ -48,6 +48,9 @@ typedef struct			s_nod
 	short				y1;
 	short				x2;
 	short				y2;
+	int					index;
+	int					removeflag1;
+	int					removeflag2;
 	struct s_nod		*nxt;
 }						t_nod;
 
@@ -97,6 +100,8 @@ typedef struct	s_map
 	int y_c;
 	
 
+	int	removeindx;
+
 }				t_map;
 
 
@@ -116,7 +121,7 @@ void	draw_point(t_map *map, int x, int y, t_color color);
 void	draw_grid(t_map *map);
 
 void	draw_nodes(t_map *map);
-void	draw_node(t_map *map, t_nod *n);
+void	draw_node(t_map *map, t_nod *n, int inx);
 void	add_node(t_map *mp, int x, int y);
 void	draw_pr(t_map *map, int x, int y, unsigned char c);
 void	draw_gr(t_map *map, int x, int y, t_color color);
@@ -131,7 +136,8 @@ void	events(t_map *map);
 int		mmove(int x, int y, t_map *map, SDL_Event event);
 
 
-int pix_range(t_map *map, int x, int y);///////////////
+int color_range(t_map *map, int x, int y);///////////////
+int	pixel_range(t_map *map, int x, int y);///////////
 
 int		ukey(int key, t_map *map);
 int		pkey(int key, t_map *map);
@@ -145,6 +151,8 @@ int		interface_click(t_map *map, int x, int y);
 
 
 void bigdot(t_map *map, int x, int y, t_color color);
+// void add_node(t_map *map, int x, int y, int i);
+int nod_len(t_nod *nod);
 
 
 // void turn_btn(t_btn *b);

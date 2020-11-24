@@ -1,6 +1,21 @@
 #include "../include/map.h"
 #include <math.h>
 
+int nod_len(t_nod *nod)
+{
+	t_nod *n;
+	int i;
+
+	n = nod;
+	i = 0;
+	while (n)
+	{
+		i++;
+		n = n->nxt;
+	}
+	return(i);
+}
+
 t_nod	*n_cr(short x1, short y1, short x2, short y2)
 {
 	t_nod *a;
@@ -11,24 +26,28 @@ t_nod	*n_cr(short x1, short y1, short x2, short y2)
 	a->y1 = y1;
 	a->x2 = x2;
 	a->y2 = y2;
+	a->removeflag1 = 0;
+	a->removeflag2 = 0;
 	a->nxt = NULL;
 	return (a);
 }
 
-void add_node(t_map *mp, int x, int y)
+
+
+void add_node(t_map *map, int x, int y)
 {
 	t_nod *n;
 	t_nod *cur;
 
-	n = n_cr(mp->x_clck - mp->z_x, mp->y_clck  - mp->z_y, x - mp->z_x, y - mp->z_y);
-	if (mp->nod == NULL)
+	n = n_cr(map->x_clck - map->z_x, map->y_clck  - map->z_y, x - map->z_x, y - map->z_y);
+	if (map->nod == NULL)
 	{
-		mp->nod = n;
+		map->nod = n;
 		return;
 	}
 	else
 	{
-		cur = mp->nod;
+		cur = map->nod;
 		while (cur->nxt)
 		{
 			cur = cur->nxt;
@@ -48,20 +67,7 @@ void draw_gr(t_map *map, int x, int y, t_color color)
 	}
 }
 
-void draw_pr(t_map *map, int x, int y, unsigned char c)
-{
-	int pixel;
-
-	if (x < WIDTH && y < HEIGHT)
-	{
-		pixel = (x * map->inter_tex[0]->pixb) + (y * map->inter_tex[0]->strb);
-		map->inter_tex[0]->s[pixel] = c;
-		map->inter_tex[0]->s[++pixel] = 0;
-		map->inter_tex[0]->s[++pixel] = c;
-	}
-}
-
-void draw_node(t_map *map, t_nod *n)
+void draw_node(t_map *map, t_nod *n, int inx)
 {
 	int x1;
 	int y1;
@@ -141,20 +147,38 @@ void draw_node(t_map *map, t_nod *n)
 			i += di;
 		}
 	}
-	bigdot(map, x1, y1, RED);
-	bigdot(map, x2, y2, RED);
+	// if (map->removeflag1 % 2 == 1)
+	// 	bigdot(map, x1, y1, (t_color){0,0,255});
+	// else
+	// 	bigdot(map, x1, y1, RED);
+	// if (map->removeflag2 % 2 == 1)
+	// 	bigdot(map, x2, y2, (t_color){0,0,255});
+	// else
+	// 	bigdot(map, x2, y2, RED);
+	printf("inx: %d\n", inx);
+	if (map->nod->index == inx && map->nod->removeflag1 % 2 == 1)
+		bigdot(map, x1, y1, (t_color){0,0,255});
+	else
+		bigdot(map, x1, y1, RED);
+	if (map->nod->index == inx && map->nod->removeflag2 % 2 == 1)
+		bigdot(map, x2, y2, (t_color){0,0,255});
+	else
+		bigdot(map, x2, y2, RED); ////////////////////////////////////////debug
 }
 
 void draw_nodes(t_map *map)
 {
 	t_nod *n;
+	int i;
 
+	i = 0;
 	n = map->nod;
 	if (n == NULL)
 		return;
-	while (n)
+	while (n) //отрисовать все сущ стены
 	{
-		draw_node(map, n);
+		i++;
+		draw_node(map, n, i);
 		n = n->nxt;
 	}
 }

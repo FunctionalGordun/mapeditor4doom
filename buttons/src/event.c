@@ -30,19 +30,19 @@ int	pixel_used(t_map *map, int x, int y, int r_g_b)
 	pixel = (x * map->inter_tex[0]->pixb) + (y * map->inter_tex[0]->strb);
 	return (map->inter_tex[0]->s[r_g_b + pixel]);
 }
-int pix_range(t_map *map, int x, int y) /////////////////хуйня
+int color_range(t_map *map, int x, int y) /////////////////хуйня
 {
-	if (pixel_used(map, x, y, 1) == 255 ||
-	pixel_used(map, x+1, y+1, 1) == 255 ||
-	pixel_used(map, x+2, y+2, 1) == 255 ||
-	pixel_used(map, x+3, y+3, 1) == 255 ||
-	pixel_used(map, x+4, y+4, 1) == 255 ||
-	pixel_used(map, x-1, y-1, 1) == 255 ||
-	pixel_used(map, x-1, y-1, 1) == 255 ||
-	pixel_used(map, x-2, y-2, 1) == 255 ||
-	pixel_used(map, x-3, y-3, 1) == 255 ||
-	pixel_used(map, x-4, y-4, 1) == 255)
-		return (1);
+	int i;
+	int j;
+
+	i = -1;
+	j = -5;
+	while (++i < 5 || ++j < 1)
+	{
+		if (pixel_used(map, x + i, y + i, 1) == 255 || pixel_used(map, x + j, y + j, 1) == 255 ||
+		pixel_used(map, x + i, y + i, 2) == 255 || pixel_used(map, x + j, y + j, 2) == 255)
+			return (1);
+	}
 	return(0);
 }
 
@@ -56,8 +56,12 @@ int		mmove(int x, int y, t_map *map, SDL_Event event)
 	}
 	if (map->inter_tex[8]->active)
 	{
-		if (pix_range(map, x, y) && interface_click(map, x, y)) /////////////////хуйня
+		if (color_range(map, x, y) && interface_click(map, x, y)) /////////////////хуйня
+		{
+			
 			mouse_icon(map, x, y);
+			
+		}
 	}
 	return (0);
 }
@@ -87,7 +91,12 @@ void	events(t_map *map)
 		}
 		if (event.type == SDL_MOUSEMOTION)
 		{
-			draw(map);
+			if (map->inter_tex[8]->active)
+			{
+				usleep(200000);
+				//sleep(1);
+				draw(map);
+			}
 			mmove(event.motion.x, event.motion.y, map, event);
 			SDL_UpdateWindowSurface(map->win);
 		}
