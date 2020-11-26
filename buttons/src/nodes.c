@@ -26,8 +26,7 @@ t_nod	*n_cr(short x1, short y1, short x2, short y2)
 	a->y1 = y1;
 	a->x2 = x2;
 	a->y2 = y2;
-	a->removeflag1 = 0;
-	a->removeflag2 = 0;
+	a->removeflag = 0;
 	a->nxt = NULL;
 	return (a);
 }
@@ -39,7 +38,7 @@ void add_node(t_map *map, int x, int y)
 	t_nod *n;
 	t_nod *cur;
 
-	n = n_cr(map->x_clck - map->z_x, map->y_clck  - map->z_y, x - map->z_x, y - map->z_y);
+	n = n_cr(map->x_c - map->z_x, map->y_c  - map->z_y, x - map->z_x, y - map->z_y);
 	if (map->nod == NULL)
 	{
 		map->nod = n;
@@ -85,85 +84,73 @@ void draw_node(t_map *map, t_nod *n, int inx)
 	int diry;
 	int di;
 
-	x1 = n->x1 + map->z_x;
-	x2 = n->x2 + map->z_x;
-	if (x1 < 0 && x2 < 0)
-		return;
-	y1 = n->y1 + map->z_y;
-	y2 = n->y2 + map->z_y;
-	dx = abs(x1 - x2);
-	dy = abs(y1 - y2);
-	er = 0;
-	de = dy + 1;
-	j = y1;
-	i = x1;
-	di = 0;
-	
-	if (dx > dy)
+	if (!n->removeflag)
 	{
-		i = x1;
-		j = y1;
-		di = (x2 - x1) / dx;
-		diry = y2 - y1;
+		x1 = n->x1 + map->z_x;
+		x2 = n->x2 + map->z_x;
+		if (x1 < 0 && x2 < 0)
+			return;
+		y1 = n->y1 + map->z_y;
+		y2 = n->y2 + map->z_y;
+		dx = abs(x1 - x2);
+		dy = abs(y1 - y2);
+		er = 0;
 		de = dy + 1;
-		if (diry > 0)
-			diry = 1;
-		if (diry < 0)
-			diry = -1;
+		j = y1;
+		i = x1;
+		di = 0;
 		
-		while (i != x2)
+		if (dx > dy)
 		{
-			draw_gr(map, i, j, GREEN);
-			er += de;
-			if (er >= dx + 1)
+			i = x1;
+			j = y1;
+			di = (x2 - x1) / dx;
+			diry = y2 - y1;
+			de = dy + 1;
+			if (diry > 0)
+				diry = 1;
+			if (diry < 0)
+				diry = -1;
+			
+			while (i != x2)
 			{
-				j += diry;
-				er = er - (dx + 1);
+				draw_gr(map, i, j, GREEN);
+				er += de;
+				if (er >= dx + 1)
+				{
+					j += diry;
+					er = er - (dx + 1);
+				}
+				i += di;
 			}
-			i += di;
 		}
-	}
-	else if (dy != 0)
-	{
-		i = y1;
-		j = x1;
-		di = (y2 - y1) / dy;
-		diry = x2 - x1;
-		de = dx + 1;
-		if (diry > 0)
-			diry = 1;
-		if (diry < 0)
-			diry = -1;
-		
-		while (i != y2)
+		else if (dy != 0)
 		{
-			draw_gr(map, j, i, GREEN);
-			er += de;
-			if (er >= dy + 1)
+			i = y1;
+			j = x1;
+			di = (y2 - y1) / dy;
+			diry = x2 - x1;
+			de = dx + 1;
+			if (diry > 0)
+				diry = 1;
+			if (diry < 0)
+				diry = -1;
+			
+			while (i != y2)
 			{
-				j += diry;
-				er = er - (dy + 1);
+				draw_gr(map, j, i, GREEN);
+				er += de;
+				if (er >= dy + 1)
+				{
+					j += diry;
+					er = er - (dy + 1);
+				}
+				i += di;
 			}
-			i += di;
 		}
-	}
-	// if (map->removeflag1 % 2 == 1)
-	// 	bigdot(map, x1, y1, (t_color){0,0,255});
-	// else
-	// 	bigdot(map, x1, y1, RED);
-	// if (map->removeflag2 % 2 == 1)
-	// 	bigdot(map, x2, y2, (t_color){0,0,255});
-	// else
-	// 	bigdot(map, x2, y2, RED);
-	printf("inx: %d\n", inx);
-	if (map->nod->index == inx && map->nod->removeflag1 % 2 == 1)
-		bigdot(map, x1, y1, (t_color){0,0,255});
-	else
 		bigdot(map, x1, y1, RED);
-	if (map->nod->index == inx && map->nod->removeflag2 % 2 == 1)
-		bigdot(map, x2, y2, (t_color){0,0,255});
-	else
-		bigdot(map, x2, y2, RED); ////////////////////////////////////////debug
+		bigdot(map, x2, y2, RED);
+	}
 }
 
 void draw_nodes(t_map *map)
@@ -175,7 +162,7 @@ void draw_nodes(t_map *map)
 	n = map->nod;
 	if (n == NULL)
 		return;
-	while (n) //отрисовать все сущ стены
+	while (n)
 	{
 		i++;
 		draw_node(map, n, i);
@@ -197,36 +184,36 @@ void	find_coord(t_map *map, int *x, int *y)
 	t_nod *nod;
 
 	nod = map->nod;
-	x1 = *x;
-	y1 = *y;
-	abs1 = 50;
+	x1 = *x + 10;
+	y1 = *y + 10;
+	abs1 = 200;
 	if (!nod)
 		return ;
 	while (nod)
 	{
-		if (abs(nod->x1 - *x) < 5 && abs(nod->y1 - *y) < 5)
+		if (abs((nod->x1 + map->z_x) - *x) < 10 && abs((nod->y1 + map->z_y) - *y) < 10)
 		{
-			abs2 = sq(*x, *y, nod->x1, nod->y1);
+			abs2 = sq(*x, *y, nod->x1 + map->z_x, nod->y1 + map->z_y);
 			if (abs2 < abs1)
 			{
 				abs1 = abs2;
-				x1 = nod->x1;
-				y1 = nod->y1;
+				x1 = nod->x1 + map->z_x;
+				y1 = nod->y1 + map->z_y;
 			}
 		}
-		if (abs(nod->x2 - *x) < 5 && abs(nod->y2 - *y) < 5)
+		if (abs((nod->x2 + map->z_x) - *x) < 10 && abs((nod->y2 + map->z_y) - *y) < 10)
 		{
-			abs2 = sq(*x, *y, nod->x2, nod->y2);
+			abs2 = sq(*x, *y, nod->x2 + map->z_x, nod->y2 + map->z_y);
 			if (abs2 < abs1)
 			{
 				abs1 = abs2;
-				x1 = nod->x2;
-				y1 = nod->y2;
+				x1 = nod->x2 + map->z_x;
+				y1 = nod->y2 + map->z_y;
 			}
 		}
 		nod = nod->nxt;
 	}
-	if (abs1 < 5)
+	if (abs1 < 200)
 	{
 		*x = x1;
 		*y = y1;

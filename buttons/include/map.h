@@ -8,18 +8,15 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <fcntl.h>
-// #include "SDL/include/SDL_image.h"
-
-// #include "SDL/frameworks/SDL2_image.framework/Headers/SDL_image.h"
 #include <stdio.h>
-// #include <SDL2/SDL.h>
-// #include "SDL.h"
 
 # define APPLEGREY (t_color){33, 33, 33}
 # define GREY (t_color){74, 74, 74}
 # define WHITE (t_color){255, 255, 255}
 # define RED (t_color){255, 0, 0}
 # define GREEN (t_color){0, 255, 0}
+# define YELLOW (t_color){255, 255, 0}
+# define HOTPINK (t_color){255, 105, 180}
 
 
 # define WIDTH 1224
@@ -49,8 +46,7 @@ typedef struct			s_nod
 	short				x2;
 	short				y2;
 	int					index;
-	int					removeflag1;
-	int					removeflag2;
+	int					removeflag;
 	struct s_nod		*nxt;
 }						t_nod;
 

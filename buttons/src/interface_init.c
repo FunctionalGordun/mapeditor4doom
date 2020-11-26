@@ -58,6 +58,7 @@ void	init_interface(t_map *map)
 	{
 		map->inter_tex[i]->img = SDL_ConvertSurfaceFormat(map->inter_tex[i]->img, SDL_PIXELFORMAT_BGRA32, 0);
 		init_texture(map->inter_tex[i]->img,&(map->inter_tex[i]->s), &(map->inter_tex[i]->pixb), &(map->inter_tex[i]->strb));
+		if (i != 6)
 		map->inter_tex[i]->active = 0;
 	}
 	

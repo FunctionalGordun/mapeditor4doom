@@ -24,22 +24,17 @@ void	wall_editor(t_map *map, int x, int y)
 		map->x_clck = x;
 		map->y_clck = y;
 		map->click = 1;
-		map->x_c = (x - map->z_x);
-		map->y_c = (y - map->z_y);
-		if (map->sh == 0) //
-			find_coord(map, &(map->x_c), &(map->y_c));
-		// add_node(map, x, y);
+		map->x_c = x;
+		map->y_c = y;
+		find_coord(map, &(map->x_c), &(map->y_c));
 	}
 	else if (interface_click(map, x, y))
 	{
 		map->click = 0;
-		x1 = (x - map->z_x);//
-		y1 = (y - map->z_y);//
-		if (map->sh == 0)//
-			find_coord(map, &x1, &y1);
+		x1 = (x - map->z_x);
+		y1 = (y - map->z_y);
+		find_coord(map, &x, &y);
 		add_node(map, x, y);
 		map->nod->index = nod_len(map->nod);
-		//printf("nod x %d y %d x2 %d y2 %d\n", map->nod->x1, map->nod->y1, map->nod->x2, map->nod->y2);
 	}
-	// map->nod->index = 
 }

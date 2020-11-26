@@ -20,7 +20,10 @@ void section_click(t_map *map, int x, int y)
 
 void	mouse_icon(t_map *map, int x, int y)
 {
+	
+	draw(map);
 	draw_img(map, 9, x - 5, y - 20, 15, 15);
+	
 }
 
 int	pixel_used(t_map *map, int x, int y, int r_g_b)
@@ -48,20 +51,20 @@ int color_range(t_map *map, int x, int y) /////////////////хуйня
 
 int		mmove(int x, int y, t_map *map, SDL_Event event)
 {
+	int x1 = x;
+	int y1 = y;
 	if (map->sh == 0)
 	{
-		int x1 = (x - map->z_x);
-		int y1 = (y - map->z_y);
 		find_coord(map, &x1, &y1);
+		draw(map);
+		if (x1 != x || y1 != y)
+			bigdot(map, x1, y1, HOTPINK);
 	}
 	if (map->inter_tex[8]->active)
 	{
-		if (color_range(map, x, y) && interface_click(map, x, y)) /////////////////хуйня
-		{
-			
-			mouse_icon(map, x, y);
-			
-		}
+		find_coord(map, &x1, &y1);
+		if (x1 != x || y1 != y)
+			mouse_icon(map, x1, y1);
 	}
 	return (0);
 }
@@ -91,12 +94,6 @@ void	events(t_map *map)
 		}
 		if (event.type == SDL_MOUSEMOTION)
 		{
-			if (map->inter_tex[8]->active)
-			{
-				usleep(200000);
-				//sleep(1);
-				draw(map);
-			}
 			mmove(event.motion.x, event.motion.y, map, event);
 			SDL_UpdateWindowSurface(map->win);
 		}

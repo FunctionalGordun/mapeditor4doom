@@ -102,6 +102,7 @@ void draw_grid(t_map *map)
 			if ((i - map->z_y) % SCALE == 0 && (j - map->z_x) % SCALE == 0)
 				draw_point(map, j, i, GREY);
 			else if ((i - map->z_y) % SCALE == 0 || (j - map->z_x) % SCALE == 0)
+				
 				draw_pixel(map, j, i, APPLEGREY);
 			else
 				draw_pixel(map, j, i, (t_color){0, 0, 0});
@@ -126,9 +127,8 @@ void draw(t_map *map)
 	draw_img(map, 7, 130, 60, 30, 30);
 	draw_img(map, 8, 180, 60, 30, 30);
 
-	if (map->click) ///начало
-		bigdot(map, map->x_clck, map->y_clck, RED);
+	if (map->click)
+		bigdot(map, map->x_c, map->y_c, RED);
 	draw_nodes(map);
-	//printf("x: %d y: %d x2: %d y2:%d\n", map->nod->x1, map->nod->y1, map->nod->x2, map->nod->y2);
 	SDL_UpdateWindowSurface(map->win);
 }
