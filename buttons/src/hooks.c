@@ -1,37 +1,18 @@
 #include "../include/map.h"
 
-// void turn_btn(t_btn *b)
-// {
-// 	(*b).active = !((*b).active);
-// }
+int interface_click(t_map *map, int x, int y)
+{
+	if ((x > 0 &&  x < 300) && y > 0 && y < 800)
+		return(0);
+	return(1);
+}
 
-// int		press_b(t_btn b, int key, int x, int y)
-// {
-// 	if (b.active && x < b.xpos + b.w && x > b.xpos && y < b.ypos + b.h && y > b.ypos)
-// 		return (key);
-// 	return (0);
-// }
-
-// int		mkey(int key, int x, int y, t_map *map)
-// {
-// 	printf("key %d x %d y %d\n", key, x, y);
-// 	if (press_b(map->interface.b[0], key, x, y))
-// 	{
-// 		map->plr.rypos -= 3;
-// 	}
-// 	if (press_b(map->interface.b[1], key, x, y))
-// 		map->plr.rypos += 3;
-// 	if (press_b(map->interface.b[2], key, x, y))
-// 		map->plr.rxpos -= 3;
-// 	if (press_b(map->interface.b[3], key, x, y))
-// 		map->plr.rxpos += 3;
-// 	if (press_b(map->interface.b[4], key, x, y))
-// 	{
-// 		turn_btn(&map->interface.b[0]);
-// 		turn_btn(&map->interface.b[1]);
-// 		turn_btn(&map->interface.b[2]);
-// 		turn_btn(&map->interface.b[3]);
-// 	}
-// 	draw(map);
-// 	return (0);
-// }
+void section_click(t_map *map, int x, int y)
+{
+	if ((x > 80 &&  x < 80 + map->inter_tex[6]->img->w) && y > 60 && y < 60 + map->inter_tex[6]->img->h)
+		edit_tool(map, 6);
+	if ((x > 130 &&  x < 130 + map->inter_tex[7]->img->w) && y > 60 && y < 60 + map->inter_tex[7]->img->h)
+		edit_tool(map, 7);
+	if ((x > 180 &&  x < 180 + map->inter_tex[8]->img->w) && y > 60 && y < 60 + map->inter_tex[8]->img->h)
+		edit_tool(map, 8);
+}

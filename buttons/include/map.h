@@ -71,33 +71,26 @@ typedef struct	s_win
 
 typedef struct	s_image
 {
-SDL_Surface			*img;
-unsigned char		*s;
-unsigned char		pixb;
-int					strb;
-int					active;
+	SDL_Surface			*img;
+	unsigned char		*s;
+	unsigned char		pixb;
+	int					strb;
+	int					active;
 }					t_image;
 
 typedef struct	s_map
 {
 	SDL_Window			*win;
 	t_image				*inter_tex[10];
+	t_image				*curosr_img;
+	SDL_Cursor			*cursor;
 	t_nod				*nod;
 
 	int					z_x;
 	int					z_y;
 	int click;
-	int x_clck;
-	int y_clck;
-	int sh;
-	int fd;
-
 	int x_c;
 	int y_c;
-	
-
-	int	removeindx;
-
 }				t_map;
 
 
@@ -144,6 +137,7 @@ void	edit_tool(t_map *map, int index);
 void	wall_editor(t_map *map, int x, int y);
 
 int		interface_click(t_map *map, int x, int y);
+void section_click(t_map *map, int x, int y);
 
 
 void bigdot(t_map *map, int x, int y, t_color color);
@@ -151,8 +145,12 @@ void bigdot(t_map *map, int x, int y, t_color color);
 int nod_len(t_nod *nod);
 
 
-// void turn_btn(t_btn *b);
-// int		press_b(t_btn b, int key, int x, int y);
-// int		mkey(int key, int x, int y, t_map *map);
+
+void cursor(t_map *map, const char *file, int hot_x, int hot_y);
+
+
+
+
+void	made_blocks(t_map *map);
 
 #endif

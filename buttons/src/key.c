@@ -36,43 +36,24 @@ int		mkey(int key, int x, int y, t_map *map)
 
 int		pkey(int key, t_map *map)
 {
-	if (key == 225)
-	{
-		map->sh = 1;
-	}
 	if (key == 82)
 	{
 		map->z_y -= 3;
-		map->y_clck -= 3;
 	}
 	if (key == 81)
 	{
 		map->z_y += 3;
-		map->y_clck += 3;
 	}
 	if (key == 79)
 	{
 		map->z_x += 3;
-		map->x_clck += 3;
 	}
 	if (key == 80)
 	{
 		map->z_x -= 3;
-		map->x_clck -= 3;
 	}
 	if (key == 27)
-	{
 		exit(1);
-	}
 	printf("%d\n", key);
-	//draw_grid(map);
-	// draw(map);
-	return (0);
-}
-
-int		ukey(int key, t_map *map)
-{
-	if (key == 225)
-		map->sh = 0;
 	return (0);
 }

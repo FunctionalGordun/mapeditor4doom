@@ -13,9 +13,7 @@ void draw_img(t_map *map, int inx, int x, int y, int wdth, int hth)
 		j = x;
 		while (j < WIDTH && j < x + wdth)
 		{
-			
 			pixel1 = i * map->inter_tex[0]->strb + j * map->inter_tex[0]->pixb;
-
 			pixel2 = (int)((double)(i-y)/hth * map->inter_tex[inx]->img->h) * map->inter_tex[inx]->strb + (int)((double)(j - x)/wdth * map->inter_tex[inx]->img->w) * map->inter_tex[inx]->pixb;
 			map->inter_tex[0]->s[pixel1] = map->inter_tex[inx]->s[pixel2];
 			map->inter_tex[0]->s[++pixel1] = map->inter_tex[inx]->s[++pixel2];

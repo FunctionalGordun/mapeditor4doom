@@ -1,71 +1,44 @@
 #include "../include/map.h"
 
-int interface_click(t_map *map, int x, int y)
-{
-	
-	if ((x > 0 &&  x < 300) && y > 0 && y < 800)
-		return(0);
-	return(1);
-}
+// int	pixel_used(t_map *map, int x, int y, int r_g_b)
+// {
+// 	int pixel;
 
-void section_click(t_map *map, int x, int y)
-{
-	if ((x > 80 &&  x < 80 + map->inter_tex[6]->img->w) && y > 60 && y < 60 + map->inter_tex[6]->img->h)
-		edit_tool(map, 6);
-	if ((x > 130 &&  x < 130 + map->inter_tex[7]->img->w) && y > 60 && y < 60 + map->inter_tex[7]->img->h)
-		edit_tool(map, 7);
-	if ((x > 180 &&  x < 180 + map->inter_tex[8]->img->w) && y > 60 && y < 60 + map->inter_tex[8]->img->h)
-		edit_tool(map, 8);
-}
+// 	pixel = (x * map->inter_tex[0]->pixb) + (y * map->inter_tex[0]->strb);
+// 	return (map->inter_tex[0]->s[r_g_b + pixel]);
+// }
+// int color_range(t_map *map, int x, int y) /////////////////хуйня
+// {
+// 	int i;
+// 	int j;
 
-void	mouse_icon(t_map *map, int x, int y)
-{
-	
-	draw(map);
-	draw_img(map, 9, x - 5, y - 20, 15, 15);
-	
-}
-
-int	pixel_used(t_map *map, int x, int y, int r_g_b)
-{
-	int pixel;
-
-	pixel = (x * map->inter_tex[0]->pixb) + (y * map->inter_tex[0]->strb);
-	return (map->inter_tex[0]->s[r_g_b + pixel]);
-}
-int color_range(t_map *map, int x, int y) /////////////////хуйня
-{
-	int i;
-	int j;
-
-	i = -1;
-	j = -5;
-	while (++i < 5 || ++j < 1)
-	{
-		if (pixel_used(map, x + i, y + i, 1) == 255 || pixel_used(map, x + j, y + j, 1) == 255 ||
-		pixel_used(map, x + i, y + i, 2) == 255 || pixel_used(map, x + j, y + j, 2) == 255)
-			return (1);
-	}
-	return(0);
-}
+// 	i = -1;
+// 	j = -5;
+// 	while (++i < 5 || ++j < 1)
+// 	{
+// 		if (pixel_used(map, x + i, y + i, 1) == 255 || pixel_used(map, x + j, y + j, 1) == 255 ||
+// 		pixel_used(map, x + i, y + i, 2) == 255 || pixel_used(map, x + j, y + j, 2) == 255)
+// 			return (1);
+// 	}
+// 	return(0);
+// }
 
 int		mmove(int x, int y, t_map *map, SDL_Event event)
 {
 	int x1 = x;
 	int y1 = y;
-	if (map->sh == 0)
+	find_coord(map, &x1, &y1);
+	draw(map);
+	if (map->inter_tex[6]->active && interface_click(map, x, y))
 	{
-		find_coord(map, &x1, &y1);
-		draw(map);
 		if (x1 != x || y1 != y)
 			bigdot(map, x1, y1, HOTPINK);
+		cursor(map, "/textures/interface/editpic.png", 0, 16);
 	}
-	if (map->inter_tex[8]->active)
-	{
-		find_coord(map, &x1, &y1);
-		if (x1 != x || y1 != y)
-			mouse_icon(map, x1, y1);
-	}
+	else if (map->inter_tex[8]->active)
+		(x1 != x || y1 != y) ? cursor(map, "/textures/interface/deletic.png", 8, 8) : SDL_FreeCursor(map->cursor);
+	else
+		SDL_FreeCursor(map->cursor);
 	return (0);
 }
 
@@ -77,14 +50,13 @@ void	events(t_map *map)
 	SDL_Event event;
 	int done = 0;
 
+	
 	while ((!done) && SDL_WaitEvent(&event))
 	{
 		if (event.type == SDL_QUIT)
 			done = 1;
 		if (event.type == SDL_KEYDOWN)
 			pkey((unsigned char)event.key.keysym.sym, map);
-		if (event.type == SDL_KEYUP)
-			ukey((unsigned char)event.key.keysym.sym, map);
 		if (event.type == SDL_MOUSEBUTTONDOWN)
 		{
 			SDL_GetMouseState(&x, &y);
@@ -94,6 +66,7 @@ void	events(t_map *map)
 		}
 		if (event.type == SDL_MOUSEMOTION)
 		{
+			made_blocks(map);
 			mmove(event.motion.x, event.motion.y, map, event);
 			SDL_UpdateWindowSurface(map->win);
 		}

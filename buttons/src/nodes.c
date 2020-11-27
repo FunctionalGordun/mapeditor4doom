@@ -20,7 +20,6 @@ t_nod	*n_cr(short x1, short y1, short x2, short y2)
 {
 	t_nod *a;
 
-	// printf("x1 %d y1 %d x2 %d y2 %d\n", x1, y1, x2, y2);
 	a = (t_nod*)malloc(sizeof(t_nod));
 	a->x1 = x1;
 	a->y1 = y1;

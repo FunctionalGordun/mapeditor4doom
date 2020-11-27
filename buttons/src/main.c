@@ -6,10 +6,18 @@ void i_error()
 	exit(1);
 }
 
+// int zvezd(int n)
+// {
+// 	if (n < 1)
+// 		return (1);
+// 	else if (n >= 1)
+// 		return (2 +(zvezd(--n) + 2 + zvezd(n -= 2)));
+// }
+
 int main(int ac, char **av)
 {
+	// printf("len: %d\n", zvezd(35));
 	t_map *map;
-
 	unsigned int t;
 	unsigned int t1;
 

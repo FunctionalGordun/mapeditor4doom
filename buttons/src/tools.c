@@ -21,8 +21,6 @@ void	wall_editor(t_map *map, int x, int y)
 
 	if (map->click == 0 && interface_click(map, x, y))
 	{
-		map->x_clck = x;
-		map->y_clck = y;
 		map->click = 1;
 		map->x_c = x;
 		map->y_c = y;
