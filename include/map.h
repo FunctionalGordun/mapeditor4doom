@@ -1,8 +1,8 @@
 #ifndef MAP_H
 # define MAP_H
 
-#include "../../SDL2/include/SDL2/SDL.h"
-#include "../../SDL2/include/SDL2/SDL_image.h"
+#include "../SDL2/include/SDL2/SDL.h"
+#include "../SDL2/include/SDL2/SDL_image.h"
 # include "libft.h"
 # include <math.h>
 # include <stdlib.h>
@@ -81,16 +81,19 @@ typedef struct	s_image
 typedef struct	s_map
 {
 	SDL_Window			*win;
-	t_image				*inter_tex[10];
+	t_image				*inter_tex[12];
 	t_image				*curosr_img;
 	SDL_Cursor			*cursor;
 	t_nod				*nod;
 
+	int					wclick;
 	int					z_x;
 	int					z_y;
 	int click;
 	int x_c;
 	int y_c;
+
+	
 }				t_map;
 
 
@@ -150,7 +153,13 @@ void cursor(t_map *map, const char *file, int hot_x, int hot_y);
 
 
 
-
+void add_my_node(t_map *map, int x1, int y1, int x2, int y2);
 void	made_blocks(t_map *map);
+void pentagon(t_map *map, int x, int y);
+void hexagon(t_map *map, int x, int y);
+void octagon(t_map *map, int x, int y);
+
+void drawline(t_map *map, int width, int x, int y);
+void draw_slider(t_map *map);
 
 #endif

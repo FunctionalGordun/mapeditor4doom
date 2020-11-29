@@ -60,13 +60,14 @@ void	events(t_map *map)
 		if (event.type == SDL_MOUSEBUTTONDOWN)
 		{
 			SDL_GetMouseState(&x, &y);
+			hexagon(map, x, y);
 			mkey(event.button.button, x, y, map);
 			section_click(map, x, y);
 			draw(map);
 		}
 		if (event.type == SDL_MOUSEMOTION)
 		{
-			made_blocks(map);
+			//made_blocks(map);
 			mmove(event.motion.x, event.motion.y, map, event);
 			SDL_UpdateWindowSurface(map->win);
 		}

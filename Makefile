@@ -1,10 +1,10 @@
 NAME = map
 
-INC = -I ../SDL2/include
-SDL_LIB = -L ../SDL2/lib -lSDL2
+INC = -I SDL2/include
+SDL_LIB = -L SDL2/lib -lSDL2
 
-IMC = -I ../SDL2/include
-IMG_LIB = -L ../SDL2/lib -lSDL2_image
+IMC = -I SDL2/include
+IMG_LIB = -L SDL2/lib -lSDL2_image
 
 CC = gcc
 

@@ -15,4 +15,8 @@ void section_click(t_map *map, int x, int y)
 		edit_tool(map, 7);
 	if ((x > 180 &&  x < 180 + map->inter_tex[8]->img->w) && y > 60 && y < 60 + map->inter_tex[8]->img->h)
 		edit_tool(map, 8);
+	if ((x > 70 && x < 70 + map->inter_tex[10]->img->w) && y > 140 && y < 140 + map->inter_tex[10]->img->h)
+		map->wclick--;
+	if ((x > 195 && x < 195 + map->inter_tex[11]->img->w) && y > 140 && y < 140 + map->inter_tex[11]->img->h)
+		map->wclick++;
 }

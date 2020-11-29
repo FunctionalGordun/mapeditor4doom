@@ -18,6 +18,7 @@ int		init_all(t_map *map)
 	map->z_y = HEIGHT / 2;
 	map->click = 0;
 	map->nod = NULL;
+	map->wclick = 25;
 	return (1);
 }
 
@@ -35,7 +36,9 @@ void	get_inter_textures(t_map *map)
 	map->inter_tex[6]->img = IMG_Load("/textures/interface/walltool.png");
 	map->inter_tex[7]->img = IMG_Load("/textures/interface/cursortool.png");
 	map->inter_tex[8]->img = IMG_Load("/textures/interface/removetool.png");
-	map->inter_tex[9]->img = IMG_Load("/textures/interface/deletic.png");
+	map->inter_tex[9]->img = IMG_Load("/textures/interface/widgetspanel.png");
+	map->inter_tex[10]->img = IMG_Load("/textures/interface/plusbtn.png");
+	map->inter_tex[11]->img = IMG_Load("/textures/interface/minusbtn.png");
 }
 
 void	init_interface(t_map *map)
@@ -43,16 +46,16 @@ void	init_interface(t_map *map)
 	int i;
 
 	i = -1;
-	while (++i < 10)
+	while (++i < 12)
 		map->inter_tex[i] = (t_image *)malloc(sizeof(t_image));
 	get_inter_textures(map);
 	i = 0;
-	while (++i < 10)
+	while (++i < 12)
 	{
 		map->inter_tex[i]->img = SDL_ConvertSurfaceFormat(map->inter_tex[i]->img, SDL_PIXELFORMAT_BGRA32, 0);
 		init_texture(map->inter_tex[i]->img,&(map->inter_tex[i]->s), &(map->inter_tex[i]->pixb), &(map->inter_tex[i]->strb));
-		if (i != 6)
-			map->inter_tex[i]->active = 0;
+		map->inter_tex[i]->active = 0;
 	}
+	map->inter_tex[3]->active = 1;
 	map->inter_tex[6]->active = 1;
 }

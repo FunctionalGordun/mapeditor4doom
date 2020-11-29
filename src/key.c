@@ -52,8 +52,20 @@ int		pkey(int key, t_map *map)
 	{
 		map->z_x -= 3;
 	}
+	if (key == 98) ////////////////////
+	{
+		// made_blocks(map);
+	}
+	// if (key == 61) ////////////////////
+	// {
+	// 	map->tmp++;
+	// }
+	// if (key == 45) ////////////////////
+	// {
+	// 	map->tmp--;
+	// }
 	if (key == 27)
 		exit(1);
-	printf("%d\n", key);
+	//printf("%d\n", key);
 	return (0);
 }

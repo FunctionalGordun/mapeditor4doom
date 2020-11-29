@@ -125,6 +125,8 @@ void draw(t_map *map)
 	draw_img(map, 7, 130, 60, 30, 30);
 	draw_img(map, 8, 180, 60, 30, 30);
 
+	if (map->inter_tex[3]->active)
+		draw_slider(map);
 	if (map->click)
 		bigdot(map, map->x_c, map->y_c, RED);
 	draw_nodes(map);
