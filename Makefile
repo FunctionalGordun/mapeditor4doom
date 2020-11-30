@@ -6,6 +6,9 @@ SDL_LIB = -L SDL2/lib -lSDL2
 IMC = -I SDL2/include
 IMG_LIB = -L SDL2/lib -lSDL2_image
 
+ITC = -I SDL2/include
+TTF_LIB = -L SDL2/lib -lSDL2_ttf
+
 CC = gcc
 
 MLX = -lmlx -framework OpenGL -framework AppKit
@@ -24,7 +27,7 @@ HEAD = $(HEAD_DIR)map.h
 INCLUDES = $(LIBFT_H) $(RTV1_H)
 
 SRC_DIR = src/
-SRC_FILES =		main.c draw.c hooks.c interface_init.c nodes.c event.c key.c tools.c cursor.c blocks.c
+SRC_FILES =		main.c draw.c draw2.c hooks.c interface_init.c nodes.c event.c key.c tools.c cursor.c blocks.c font.c
 
 OBJ_DIR = obj/
 OBJ_FILE =	$(SRC_FILES:.c=.o)
@@ -38,7 +41,7 @@ lib:
 	@make -C $(LIBFT_DIR)
 
 $(NAME): $(LIBFT) $(OBJ_DIR) $(OBJ) $(HEAD)
-	@$(COMP) $(LIBFT) $(SDL_LIB) $(INC) $(IMG_LIB) $(IMC) $(OBJ) -o $(NAME)
+	@$(COMP) $(LIBFT) $(SDL_LIB) $(INC) $(IMG_LIB) $(IMC) $(TTF_LIB) $(ITC) $(OBJ) -o $(NAME)
 	@echo "\033[32m \tcompiled \t map \t\t finish \033[0m"
 
 $(OBJ_DIR):

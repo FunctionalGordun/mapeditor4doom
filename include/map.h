@@ -3,6 +3,7 @@
 
 #include "../SDL2/include/SDL2/SDL.h"
 #include "../SDL2/include/SDL2/SDL_image.h"
+#include "../SDL2/include/SDL2/SDL_ttf.h"
 # include "libft.h"
 # include <math.h>
 # include <stdlib.h>
@@ -30,15 +31,6 @@ typedef struct		s_color
 	int				b;
 }					t_color;
 
-typedef struct	s_plr
-{
-	int			xpos;
-	int			ypos;
-	double		rxpos;
-	double		rypos;
-
-}				t_plr;
-
 typedef struct			s_nod
 {
 	short				x1;
@@ -49,16 +41,6 @@ typedef struct			s_nod
 	int					removeflag;
 	struct s_nod		*nxt;
 }						t_nod;
-
-typedef struct	s_btn
-{
-	int			xpos;
-	int			ypos;
-	int			h;
-	int			w;
-	int			active;
-	t_color		color;
-}				t_btn;
 
 typedef struct	s_win
 {
@@ -78,11 +60,21 @@ typedef struct	s_image
 	int					active;
 }					t_image;
 
+typedef struct	s_info
+{
+	int x;
+	int y;
+	int w;
+	int h;
+}				t_info;
+
 typedef struct	s_map
 {
 	SDL_Window			*win;
-	t_image				*inter_tex[12];
+	t_image				*inter_tex[12]; // 0 - window, 1-5 - inblock & (block, texture, object), 6-8 - tools 9-11 widget panel & widgets
+	t_image				*block_tex[4];
 	t_image				*curosr_img;
+	t_image				*font;
 	SDL_Cursor			*cursor;
 	t_nod				*nod;
 
@@ -103,20 +95,24 @@ void	init_interface(t_map *map);
 int		init_all(t_map *map);
 void	init_texture(SDL_Surface *tex, unsigned char **s, unsigned char *pixb, int *strb);
 void	get_inter_textures(t_map *map);
-
+void	malloc_block_texture(t_map *map);
+void	get_block_textures(t_map *map);
 
 void	draw(t_map *map);
-void	draw_img(t_map *map, int inx, int x, int y, int wdth, int hth);
 void	draw_color(t_map *map, int pixel, t_color color);
 void	draw_pixel(t_map *map, int x, int y, t_color color);
 void	draw_point(t_map *map, int x, int y, t_color color);
 void	draw_grid(t_map *map);
-
+void	draw_img(t_map *map, t_info *info, t_image *st);
 void	draw_nodes(t_map *map);
 void	draw_node(t_map *map, t_nod *n, int inx);
 void	add_node(t_map *mp, int x, int y);
 void	draw_pr(t_map *map, int x, int y, unsigned char c);
 void	draw_gr(t_map *map, int x, int y, t_color color);
+void	draw_line(t_map *map, int width, int x, int y);
+void	draw_slider(t_map *map);
+void	draw_block_textures(t_map *map);
+
 
 void	find_coord(t_map *mp, int *x, int *y);
 int		sq(int x1, int y1, int x2, int y2);
@@ -155,11 +151,22 @@ void cursor(t_map *map, const char *file, int hot_x, int hot_y);
 
 void add_my_node(t_map *map, int x1, int y1, int x2, int y2);
 void	made_blocks(t_map *map);
+
+void square(t_map *map, int x, int y);
 void pentagon(t_map *map, int x, int y);
 void hexagon(t_map *map, int x, int y);
 void octagon(t_map *map, int x, int y);
 
-void drawline(t_map *map, int width, int x, int y);
-void draw_slider(t_map *map);
+
+
+void fonts(t_map *map, char *str, int x, int y);
+void fonts_classic(t_map *map, char *str, int x, int y);
+void fonts_doom(t_map *map, char *str, int x, int y);
+int	struppercase(char *str);
+void whichone_tool(t_map *map);
+
+
+
+
 
 #endif

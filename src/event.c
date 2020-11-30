@@ -1,28 +1,5 @@
 #include "../include/map.h"
 
-// int	pixel_used(t_map *map, int x, int y, int r_g_b)
-// {
-// 	int pixel;
-
-// 	pixel = (x * map->inter_tex[0]->pixb) + (y * map->inter_tex[0]->strb);
-// 	return (map->inter_tex[0]->s[r_g_b + pixel]);
-// }
-// int color_range(t_map *map, int x, int y) /////////////////хуйня
-// {
-// 	int i;
-// 	int j;
-
-// 	i = -1;
-// 	j = -5;
-// 	while (++i < 5 || ++j < 1)
-// 	{
-// 		if (pixel_used(map, x + i, y + i, 1) == 255 || pixel_used(map, x + j, y + j, 1) == 255 ||
-// 		pixel_used(map, x + i, y + i, 2) == 255 || pixel_used(map, x + j, y + j, 2) == 255)
-// 			return (1);
-// 	}
-// 	return(0);
-// }
-
 int		mmove(int x, int y, t_map *map, SDL_Event event)
 {
 	int x1 = x;
@@ -60,7 +37,7 @@ void	events(t_map *map)
 		if (event.type == SDL_MOUSEBUTTONDOWN)
 		{
 			SDL_GetMouseState(&x, &y);
-			hexagon(map, x, y);
+			pentagon(map, x, y);
 			mkey(event.button.button, x, y, map);
 			section_click(map, x, y);
 			draw(map);
