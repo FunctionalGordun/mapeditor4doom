@@ -4,7 +4,7 @@ void	edit_tool(t_map *map, int index)
 {
 	int i;
 
-	i = 5;
+	i = -1;
 	while (++i < 9)
 	{
 		if (i == index)
@@ -13,6 +13,22 @@ void	edit_tool(t_map *map, int index)
 			map->inter_tex[i]->active = 0;
 	}
 }
+
+void	edit_blocktexture(t_map *map, int index)
+{
+	int i;
+
+	i = -1;
+	while (++i < 4)
+	{
+		if (i == index)
+			map->block_tex[i]->active = 1;
+		else
+			map->block_tex[i]->active = 0;
+	}
+}
+
+
 
 void	wall_editor(t_map *map, int x, int y)
 {

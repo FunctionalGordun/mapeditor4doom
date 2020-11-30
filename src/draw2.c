@@ -3,12 +3,17 @@
 void draw_slider(t_map *map)
 {
 	draw_img(map, &(t_info){40, 120, 220, 100}, map->inter_tex[9]);
-	draw_img(map, &(t_info){70, 140, 25, 25}, map->inter_tex[11]);
-	draw_img(map, &(t_info){195, 140, 25, 25}, map->inter_tex[10]);
-	draw_line(map, 100, 95, 152);
-	draw_line(map, 100, 95, 153);
-	draw_line(map, 100, 95, 154);
-	bigdot(map, 115 + (map->wclick), 153, RED);
+	if (map->block_tex[0]->active || map->block_tex[1]->active ||
+	 map->block_tex[2]->active || map->block_tex[3]->active)
+	{
+		draw_img(map, &(t_info){70, 140, 25, 25}, map->inter_tex[11]);
+		draw_img(map, &(t_info){195, 140, 25, 25}, map->inter_tex[10]);
+		draw_line(map, 100, 95, 152);
+		draw_line(map, 100, 95, 153);
+		draw_line(map, 100, 95, 154);
+		bigdot(map, 115 + (map->wclick), 153, RED);
+		fonts_classic(map, "radius", 122, 132);
+	}
 }
 
 void draw_line(t_map *map, int width, int x, int y)

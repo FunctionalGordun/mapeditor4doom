@@ -50,6 +50,7 @@ void add_my_node(t_map *map, int x1, int y1, int x2, int y2)
 	t_nod *cur;
 
 	n = n_cr(x1- map->z_x, y1 - map->z_y, x2 - map->z_x, y2 - map->z_y);
+	n->index = nod_len(map->nod);
 	if (map->nod == NULL)
 	{
 		map->nod = n;
@@ -64,4 +65,17 @@ void add_my_node(t_map *map, int x1, int y1, int x2, int y2)
 		}
 		cur->nxt = n;
 	}
+}
+
+void	made_blocks(t_map *map, int x, int y)
+{
+	if (map->block_tex[0]->active)
+		square(map, x, y);
+	printf("nod %d\n", map->nod->index);
+	if (map->block_tex[1]->active)
+		pentagon(map, x, y);
+	if (map->block_tex[2]->active)
+		hexagon(map, x, y);
+	if (map->block_tex[3]->active)
+		octagon(map, x, y);
 }

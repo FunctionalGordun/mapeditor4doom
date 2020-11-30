@@ -37,9 +37,9 @@ void	events(t_map *map)
 		if (event.type == SDL_MOUSEBUTTONDOWN)
 		{
 			SDL_GetMouseState(&x, &y);
-			pentagon(map, x, y);
+			//pentagon(map, x, y);
 			mkey(event.button.button, x, y, map);
-			section_click(map, x, y);
+			catch_click(map, x, y);
 			draw(map);
 		}
 		if (event.type == SDL_MOUSEMOTION)

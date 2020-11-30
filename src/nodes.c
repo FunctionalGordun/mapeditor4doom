@@ -38,6 +38,7 @@ void add_node(t_map *map, int x, int y)
 	t_nod *cur;
 
 	n = n_cr(map->x_c - map->z_x, map->y_c  - map->z_y, x - map->z_x, y - map->z_y);
+	n->index = nod_len(map->nod);
 	if (map->nod == NULL)
 	{
 		map->nod = n;
@@ -164,6 +165,7 @@ void draw_nodes(t_map *map)
 	while (n)
 	{
 		i++;
+		printf("nod %d\n", n->index);
 		draw_node(map, n, i);
 		n = n->nxt;
 	}

@@ -84,24 +84,19 @@ void draw_basic_interface(t_map *map)
 
 void draw_block_textures(t_map *map)
 {
-	draw_img(map, &(t_info){500, 100, 50, 50}, map->block_tex[0]);
-	// draw_img(map, &(t_info){10, 110, 280, 680}, map->inter_tex[2]);
-	// draw_img(map, &(t_info){20, 20, 70, 30}, map->inter_tex[3]);
-	// draw_img(map, &(t_info){110, 20, 70, 30}, map->inter_tex[4]);
-	// draw_img(map, &(t_info){200, 20, 70, 30}, map->inter_tex[5]);
-	// draw_img(map, &(t_info){80, 60, 30, 30}, map->inter_tex[6]);
-	// draw_img(map, &(t_info){130, 60, 30, 30}, map->inter_tex[7]);
-	// draw_img(map, &(t_info){180, 60, 30, 30}, map->inter_tex[8]);
+	draw_img(map, &(t_info){65, 250, 50, 50}, map->block_tex[0]);
+	draw_img(map, &(t_info){165, 250, 50, 50}, map->block_tex[1]);
+	draw_img(map, &(t_info){65, 320, 50, 50}, map->block_tex[2]);
+	draw_img(map, &(t_info){165, 320, 50, 50}, map->block_tex[3]);
 }
 
 void whichone_tool(t_map *map)
 {
 
-	if (map->inter_tex[3]->active)
+	if (map->inter_tex[3]->active || map->inter_tex[6]->active || map->inter_tex[7]->active || map->inter_tex[8]->active)
 	{
 		draw_block_textures(map);
 		draw_slider(map);
-		fonts_classic(map, "radius", 122, 132);
 	}
 	// (map->inter_tex[3]->active == 1) ? (draw_slider(map), fonts_classic(map, "radius", 122, 135)) : printf("qwe\n");
 	if (map->inter_tex[6]->active)
@@ -117,8 +112,11 @@ void draw(t_map *map)
 {
 	draw_basic_interface(map);
 	whichone_tool(map);
+
 	if (map->click)
 		bigdot(map, map->x_c, map->y_c, RED);
+	if (map->click && (map->block_tex[0]->active || map->block_tex[1]->active || map->block_tex[2]->active || map->block_tex[3]->active))
+		made_blocks(map, map->x_c, map->y_c);
 	draw_nodes(map);
 	SDL_UpdateWindowSurface(map->win);
 }

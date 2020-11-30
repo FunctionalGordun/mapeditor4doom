@@ -74,3 +74,7 @@ fclean: clean
 
 re: fclean all
 	@echo "\033[35m \tfclean \t\t all \t\t finish \033[0m"
+
+go:
+	$(MAKE)
+	./map

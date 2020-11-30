@@ -133,10 +133,17 @@ int		mkey(int key, int x, int y, t_map *map);
 
 
 void	edit_tool(t_map *map, int index);
+void	edit_blocktexture(t_map *map, int index);
+
+
 void	wall_editor(t_map *map, int x, int y);
 
 int		interface_click(t_map *map, int x, int y);
-void section_click(t_map *map, int x, int y);
+void	section_click(t_map *map, int x, int y);
+void	catch_click(t_map *map, int x, int y);
+int		widget_click(t_map *map, int x, int y);
+void	tools_click(t_map *map, int x, int y);
+void	blockterxture_click(t_map *map, int x, int y);
 
 
 void bigdot(t_map *map, int x, int y, t_color color);
@@ -150,7 +157,7 @@ void cursor(t_map *map, const char *file, int hot_x, int hot_y);
 
 
 void add_my_node(t_map *map, int x1, int y1, int x2, int y2);
-void	made_blocks(t_map *map);
+void	made_blocks(t_map *map, int x, int y);
 
 void square(t_map *map, int x, int y);
 void pentagon(t_map *map, int x, int y);
