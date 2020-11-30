@@ -59,7 +59,5 @@ void catch_click(t_map *map, int x, int y)
 	tools_click(map, x, y);
 	blockterxture_click(map, x, y);
 	if (!widget_click(map, x, y))
-	{
-		printf("ok\n");
-	}
+		remove_blocks(map);
 }

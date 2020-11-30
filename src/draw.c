@@ -116,7 +116,10 @@ void draw(t_map *map)
 	if (map->click)
 		bigdot(map, map->x_c, map->y_c, RED);
 	if (map->click && (map->block_tex[0]->active || map->block_tex[1]->active || map->block_tex[2]->active || map->block_tex[3]->active))
+	{
+		map->click = 0;
 		made_blocks(map, map->x_c, map->y_c);
+	}
 	draw_nodes(map);
 	SDL_UpdateWindowSurface(map->win);
 }

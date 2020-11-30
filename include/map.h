@@ -68,6 +68,13 @@ typedef struct	s_info
 	int h;
 }				t_info;
 
+typedef struct	s_removeinfo
+{
+	int *x;
+	int *y;
+}				t_removeinfo;
+
+
 typedef struct	s_map
 {
 	SDL_Window			*win;
@@ -77,6 +84,7 @@ typedef struct	s_map
 	t_image				*font;
 	SDL_Cursor			*cursor;
 	t_nod				*nod;
+	t_removeinfo		*remove;
 
 	int					wclick;
 	int					z_x;
@@ -163,6 +171,9 @@ void square(t_map *map, int x, int y);
 void pentagon(t_map *map, int x, int y);
 void hexagon(t_map *map, int x, int y);
 void octagon(t_map *map, int x, int y);
+
+void	find_remove(t_map *map, int x, int y);
+void remove_blocks(t_map *map);
 
 
 

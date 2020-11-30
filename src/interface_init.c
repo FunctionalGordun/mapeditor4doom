@@ -72,6 +72,9 @@ void	malloc_block_texture(t_map *map)
 	int i;
 
 	i = -1;
+	map->remove = malloc(sizeof(t_removeinfo*)); ///
+	map->remove->x = malloc(sizeof(int *) * 10); /// 
+	map->remove->y = malloc(sizeof(int *) * 10); ////
 	while (++i < 4)
 		map->block_tex[i] = (t_image *)malloc(sizeof(t_image));
 	get_block_textures(map);

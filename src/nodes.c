@@ -165,7 +165,6 @@ void draw_nodes(t_map *map)
 	while (n)
 	{
 		i++;
-		printf("nod %d\n", n->index);
 		draw_node(map, n, i);
 		n = n->nxt;
 	}

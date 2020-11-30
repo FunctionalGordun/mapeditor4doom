@@ -1,48 +1,86 @@
 #include "../include/map.h"
 
+// void remove_square(t_map *map)
+// {
+// 	find_remove(map, map->remove->x[0], map->remove->y[0]);
+// 	find_remove(map, map->remove->x[1], map->remove->y[1]);
+// 	find_remove(map, map->remove->x[2], map->remove->y[2]);
+// 	find_remove(map, map->remove->x[3], map->remove->y[3]);
+// }
+
+// void remove_pentagon(t_map *map)
+// {
+// 	find_remove(map, map->remove->x[0], map->remove->y[0]);
+// 	find_remove(map, map->remove->x[1], map->remove->y[1]);
+// 	find_remove(map, map->remove->x[2], map->remove->y[2]);
+// 	find_remove(map, map->remove->x[3], map->remove->y[3]);
+// 	find_remove(map, map->remove->x[4], map->remove->y[4]);
+// }
+
+void remove_blocks(t_map *map)
+{
+	int i;
+	int tmp;
+
+	i = 0;
+	if (map->block_tex[0]->active)
+		tmp = 4;
+	else if (map->block_tex[1]->active)
+		tmp = 5;
+	else if (map->block_tex[2]->active)
+		tmp = 7;
+	else if (map->block_tex[3]->active)
+		tmp = 8;
+	while (i < tmp)
+	{
+		find_remove(map, map->remove->x[i], map->remove->y[i]);
+		i++;
+	}
+}
+
+
 void square(t_map *map, int x, int y)
 {
-	add_my_node(map, (x - 25) - map->wclick, (y - 25) - map->wclick, (x + 25) + map->wclick, (y - 25) - map->wclick);
-	add_my_node(map, (x - 25) - map->wclick, (y - 25) - map->wclick, (x - 25) - map->wclick, (y + 25) + map->wclick);
-	add_my_node(map, (x + 25) + map->wclick, (y - 25) - map->wclick, (x + 25) + map->wclick, (y + 25) + map->wclick);
-	add_my_node(map, (x - 25) - map->wclick, (y + 25) + map->wclick, (x + 25) + map->wclick, (y + 25) + map->wclick);
+	add_my_node(map, map->remove->x[0] = (x - 25) - map->wclick, map->remove->y[0] =  (y - 25) - map->wclick, (x + 25) + map->wclick, (y - 25) - map->wclick);
+	add_my_node(map, map->remove->x[1] =  (x - 25) - map->wclick, map->remove->y[1] = (y - 25) - map->wclick, (x - 25) - map->wclick, (y + 25) + map->wclick);
+	add_my_node(map, map->remove->x[2] =  (x + 25) + map->wclick, map->remove->y[2] = (y - 25) - map->wclick, (x + 25) + map->wclick, (y + 25) + map->wclick);
+	add_my_node(map, map->remove->x[3] =  (x - 25) - map->wclick, map->remove->y[3] = (y + 25) + map->wclick, (x + 25) + map->wclick, (y + 25) + map->wclick);
+}
+
+void pentagon(t_map *map, int x, int y)
+{
+	add_my_node(map, map->remove->x[0] = (x - 45) - map->wclick, map->remove->y[0] = (y - 25) - map->wclick, x, (y - 75) - map->wclick); ///     ----
+	add_my_node(map, map->remove->x[1] = (x - 45) - map->wclick, map->remove->y[1] = (y - 25) - map->wclick, (x - 35) - map->wclick, (y + 25) + map->wclick); ///     ----
+	add_my_node(map, map->remove->x[2] = (x - 35) - map->wclick, map->remove->y[2] = (y + 25) + map->wclick, (x + 35) + map->wclick, (y + 25) + map->wclick); ///     ----
+	add_my_node(map, map->remove->x[3] = (x + 35) + map->wclick, map->remove->y[3] = (y + 25) + map->wclick, (x + 45) + map->wclick, (y - 25) - map->wclick); ///     ----
+	add_my_node(map, map->remove->x[4] = (x + 45) + map->wclick, map->remove->y[4] = (y - 25) - map->wclick, x, (y - 75) - map->wclick); ///     ----
+
 }
 
 
 void hexagon(t_map *map, int x, int y)
 {
-	add_my_node(map, (x - 60) - map->wclick, (y - 90) - map->wclick, (x + 60) + map->wclick, (y - 90) - map->wclick); ///     ----
-	add_my_node(map, (x - 90) - map->wclick, y, (x - 60) - map->wclick, (y - 90) - map->wclick); /// /
-	add_my_node(map, (x - 90) - map->wclick, y , (x - 60) - map->wclick, (y + 90) + map->wclick); //  \         //
-	add_my_node(map, (x + 90) + map->wclick, y, (x + 60) + map->wclick, (y - 90) - map->wclick); //            \ //
-	add_my_node(map, (x + 90) + map->wclick, y, (x + 60) + map->wclick, (y + 90) + map->wclick); //            /
-	add_my_node(map, (x - 60) - map->wclick, (y + 90) + map->wclick, (x + 60) + map->wclick, (y + 90) + map->wclick); /// 	----
+	add_my_node(map, map->remove->x[0] = (x - 60) - map->wclick, map->remove->y[0] = (y - 90) - map->wclick, (x + 60) + map->wclick, (y - 90) - map->wclick); ///     ----
+	add_my_node(map, map->remove->x[1] = (x - 90) - map->wclick, map->remove->y[1] = y, (x - 60) - map->wclick, (y - 90) - map->wclick); /// /
+	add_my_node(map, map->remove->x[2] = (x - 90) - map->wclick, map->remove->y[2] = y , (x - 60) - map->wclick, (y + 90) + map->wclick); //  \         //
+	add_my_node(map, map->remove->x[3] = (x + 90) + map->wclick, map->remove->y[3] = y, (x + 60) + map->wclick, (y - 90) - map->wclick); //            \ //
+	add_my_node(map, map->remove->x[4] = (x + 90) + map->wclick, map->remove->y[4] = y, (x + 60) + map->wclick, (y + 90) + map->wclick); //            /
+	add_my_node(map, map->remove->x[6] = (x - 60) - map->wclick, map->remove->y[5] = (y + 90) + map->wclick, (x + 60) + map->wclick, (y + 90) + map->wclick); /// 	----
 }
 
 void octagon(t_map *map, int x, int y)
 {
-	add_my_node(map, (x - 30) - map->wclick, (y - 50) - map->wclick, (x + 30) + map->wclick, (y - 50) - map->wclick); ///     ----
-	add_my_node(map, (x - 50) - map->wclick, (y - 25) - map->wclick, (x - 30) - map->wclick, (y - 50) - map->wclick); ///     /
-	add_my_node(map, (x - 50) - map->wclick, (y - 25) - map->wclick, (x - 50) - map->wclick, (y + 25) + map->wclick); ///     |
-	add_my_node(map, (x - 50) - map->wclick, (y + 25) + map->wclick, (x - 30) - map->wclick, (y + 50) + map->wclick); ///     \ //
+	add_my_node(map, map->remove->x[0] = (x - 30) - map->wclick, map->remove->y[0] = (y - 50) - map->wclick, (x + 30) + map->wclick, (y - 50) - map->wclick); ///     ----
+	add_my_node(map, map->remove->x[1] = (x - 50) - map->wclick, map->remove->y[1] = (y - 25) - map->wclick, (x - 30) - map->wclick, (y - 50) - map->wclick); ///     /
+	add_my_node(map, map->remove->x[2] = (x - 50) - map->wclick, map->remove->y[2] = (y - 25) - map->wclick, (x - 50) - map->wclick, (y + 25) + map->wclick); ///     |
+	add_my_node(map, map->remove->x[3] = (x - 50) - map->wclick, map->remove->y[3] = (y + 25) + map->wclick, (x - 30) - map->wclick, (y + 50) + map->wclick); ///     \ //
 
-	add_my_node(map, (x - 30) - map->wclick, (y + 50) + map->wclick, (x + 30) + map->wclick, (y + 50) + map->wclick);//        ----
-	add_my_node(map, (x + 30) + map->wclick, (y - 50) - map->wclick, (x + 50) + map->wclick, (y - 25) - map->wclick); ///     \ //
-	add_my_node(map, (x + 50) + map->wclick, (y - 25) - map->wclick, (x + 50) + map->wclick, (y + 25) + map->wclick); ///     |
-	add_my_node(map, (x + 50) + map->wclick, (y + 25) + map->wclick, (x + 30) + map->wclick, (y + 50) + map->wclick); ///     /
-
-
+	add_my_node(map, map->remove->x[4] = (x - 30) - map->wclick, map->remove->y[4] = (y + 50) + map->wclick, (x + 30) + map->wclick, (y + 50) + map->wclick);//        ----
+	add_my_node(map, map->remove->x[5] = (x + 30) + map->wclick, map->remove->y[5] = (y - 50) - map->wclick, (x + 50) + map->wclick, (y - 25) - map->wclick); ///     \ //
+	add_my_node(map, map->remove->x[6] = (x + 50) + map->wclick, map->remove->y[6] = (y - 25) - map->wclick, (x + 50) + map->wclick, (y + 25) + map->wclick); ///     |
+	add_my_node(map, map->remove->x[7] = (x + 50) + map->wclick, map->remove->y[7] = (y + 25) + map->wclick, (x + 30) + map->wclick, (y + 50) + map->wclick); ///     /
 }
 
-void pentagon(t_map *map, int x, int y)
-{
-	add_my_node(map, (x - 45) - map->wclick, (y - 25) - map->wclick, x, (y - 75) - map->wclick); ///     ----
-	add_my_node(map, (x - 45) - map->wclick, (y - 25) - map->wclick, (x - 35) - map->wclick, (y + 25) + map->wclick); ///     ----
-	add_my_node(map, (x - 35) - map->wclick, (y + 25) + map->wclick, (x + 35) + map->wclick, (y + 25) + map->wclick); ///     ----
-	add_my_node(map, (x + 35) + map->wclick, (y + 25) + map->wclick, (x + 45) + map->wclick, (y - 25) - map->wclick); ///     ----
-	add_my_node(map, (x + 45) + map->wclick, (y - 25) - map->wclick, x, (y - 75) - map->wclick); ///     ----
-
-}
 
 void add_my_node(t_map *map, int x1, int y1, int x2, int y2)
 {
@@ -71,7 +109,6 @@ void	made_blocks(t_map *map, int x, int y)
 {
 	if (map->block_tex[0]->active)
 		square(map, x, y);
-	printf("nod %d\n", map->nod->index);
 	if (map->block_tex[1]->active)
 		pentagon(map, x, y);
 	if (map->block_tex[2]->active)

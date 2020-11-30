@@ -1,19 +1,5 @@
 #include "../include/map.h"
 
-void	find_remove(t_map *map, int x, int y)
-{
-	t_nod *tmp;
-
-	tmp = map->nod;
-	while(tmp)
-	{
-		if ((tmp->x1 + map->z_x) == x || (tmp->y1 + map->z_x) == y ||
-		(tmp->x2 + map->z_x) == x || (tmp->y2 + map->z_x) == y)
-			tmp->removeflag = 1;
-		tmp = tmp->nxt;
-	}
-}
-
 int		mkey(int key, int x, int y, t_map *map)
 {
 	if (key == 1)
@@ -36,34 +22,6 @@ int		mkey(int key, int x, int y, t_map *map)
 
 int		pkey(int key, t_map *map)
 {
-	if (key == 82)
-	{
-		map->z_y -= 3;
-	}
-	if (key == 81)
-	{
-		map->z_y += 3;
-	}
-	if (key == 79)
-	{
-		map->z_x += 3;
-	}
-	if (key == 80)
-	{
-		map->z_x -= 3;
-	}
-	if (key == 98) ////////////////////
-	{
-		// made_blocks(map);
-	}
-	// if (key == 61) ////////////////////
-	// {
-	// 	map->tmp++;
-	// }
-	// if (key == 45) ////////////////////
-	// {
-	// 	map->tmp--;
-	// }
 	if (key == 27)
 		exit(1);
 	//printf("%d\n", key);

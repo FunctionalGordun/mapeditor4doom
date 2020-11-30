@@ -1,10 +1,25 @@
 #include "../include/map.h"
 
+void	find_remove(t_map *map, int x, int y)
+{
+	t_nod *tmp;
+
+	tmp = map->nod;
+	while(tmp)
+	{
+		if ((tmp->x1 + map->z_x) == x || (tmp->y1 + map->z_x) == y ||
+		(tmp->x2 + map->z_x) == x || (tmp->y2 + map->z_x) == y)
+			tmp->removeflag = 1;
+		tmp = tmp->nxt;
+	}
+}
+
 void	edit_tool(t_map *map, int index)
 {
 	int i;
 
 	i = -1;
+	edit_blocktexture(map, -1);
 	while (++i < 9)
 	{
 		if (i == index)
