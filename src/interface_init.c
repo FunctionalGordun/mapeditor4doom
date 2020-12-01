@@ -19,6 +19,8 @@ int		init_all(t_map *map)
 	map->click = 0;
 	map->nod = NULL;
 	map->wclick = 25;
+	map->tmpclick = 0;
+	map->showactive = 0;
 	return (1);
 }
 
@@ -38,6 +40,9 @@ void	get_inter_textures(t_map *map)
 	map->inter_tex[9]->img = IMG_Load("/textures/interface/widgetspanel.png");
 	map->inter_tex[10]->img = IMG_Load("/textures/interface/plusbtn.png");
 	map->inter_tex[11]->img = IMG_Load("/textures/interface/minusbtn.png");
+	map->inter_tex[12]->img = IMG_Load("/textures/interface/showuppanel.png");
+	map->inter_tex[13]->img = IMG_Load("/textures/interface/showupbtn.png");
+	map->inter_tex[14]->img = IMG_Load("/textures/interface/showdownbtn.png");
 }
 
 void	malloc_interface(t_map *map)
@@ -45,11 +50,11 @@ void	malloc_interface(t_map *map)
 	int i;
 
 	i = -1;
-	while (++i < 12)
+	while (++i < 15)
 		map->inter_tex[i] = (t_image *)malloc(sizeof(t_image));
 	get_inter_textures(map);
 	i = 0;
-	while (++i < 12)
+	while (++i < 15)
 	{
 		map->inter_tex[i]->img = SDL_ConvertSurfaceFormat(map->inter_tex[i]->img, SDL_PIXELFORMAT_BGRA32, 0);
 		init_texture(map->inter_tex[i]->img, &(map->inter_tex[i]->s), &(map->inter_tex[i]->pixb), &(map->inter_tex[i]->strb));
@@ -92,4 +97,6 @@ void	init_interface(t_map *map)
 {
 	malloc_interface(map);
 	malloc_block_texture(map);
+	malloc_wall_texture(map);
+	malloc_floorsky_texture(map);
 }

@@ -53,11 +53,27 @@ void blockterxture_click(t_map *map, int x, int y)
 		edit_blocktexture(map, 3);
 }
 
+void terxtures_click(t_map *map, int x, int y)
+{
+	if ((x > 260 && x < 290) && y > 195 && y < 245)
+	{
+		map->showactive = 1;
+		if (map->inter_tex[13]->active == 1)
+			map->inter_tex[13]->active = 0;
+		else
+			map->inter_tex[13]->active = 1;
+	}
+}
+
+
 void catch_click(t_map *map, int x, int y)
 {
+
 	section_click(map, x, y);
 	tools_click(map, x, y);
 	blockterxture_click(map, x, y);
 	if (!widget_click(map, x, y))
 		remove_blocks(map);
+	if (map->inter_tex[4]->active == 1)
+		terxtures_click(map, x, y);
 }

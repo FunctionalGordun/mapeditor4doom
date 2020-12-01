@@ -87,7 +87,7 @@ void add_my_node(t_map *map, int x1, int y1, int x2, int y2)
 	t_nod *n;
 	t_nod *cur;
 
-	n = n_cr(x1- map->z_x, y1 - map->z_y, x2 - map->z_x, y2 - map->z_y);
+	n = n_cr(x1 - map->z_x, y1 - map->z_y, x2 - map->z_x, y2 - map->z_y);
 	n->index = nod_len(map->nod);
 	if (map->nod == NULL)
 	{
