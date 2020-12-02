@@ -43,13 +43,8 @@ void	edit_blocktexture(t_map *map, int index)
 	}
 }
 
-
-
 void	wall_editor(t_map *map, int x, int y)
 {
-	int x1;
-	int y1;
-
 	if (map->click == 0 && interface_click(map, x, y))
 	{
 		map->click = 1;
@@ -60,10 +55,17 @@ void	wall_editor(t_map *map, int x, int y)
 	else if (interface_click(map, x, y))
 	{
 		map->click = 0;
-		x1 = (x - map->z_x);
-		y1 = (y - map->z_y);
 		find_coord(map, &x, &y);
 		add_node(map, x, y);
 		map->nod->index = nod_len(map->nod);
 	}
+}
+
+void	remove_tool(t_map *map, int x, int y)
+{
+	int x1 = x;
+	int y1 = y;
+	find_coord(map, &x1, &y1);
+	if (x1 != x || y1 != y)
+		find_remove(map, x1, y1);
 }

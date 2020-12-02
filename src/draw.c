@@ -99,15 +99,15 @@ void whichone_tool(t_map *map)
 		draw_slider(map);
 	}
 	// (map->inter_tex[3]->active == 1) ? (draw_slider(map), fonts_classic(map, "radius", 122, 135)) : printf("qwe\n");
-	if (map->inter_tex[4]->active)
+	if (map->inter_tex[4]->active == 1)
 	{
 		texture_block(map);
 	}
-	if (map->inter_tex[6]->active)
+	if (map->inter_tex[6]->active == 1)
 		fonts_classic(map, "edit tool", 305, 780);
-	if (map->inter_tex[7]->active)
+	if (map->inter_tex[7]->active == 1)
 		fonts_classic(map, "info tool", 305, 780);
-	if (map->inter_tex[8]->active)
+	if (map->inter_tex[8]->active == 1)
 		fonts_classic(map, "remove tool", 305, 780);
 }
 
@@ -116,6 +116,7 @@ void draw(t_map *map)
 {
 	draw_basic_interface(map);
 	whichone_tool(map);
+	open_texture_win(map);
 
 	if (map->click)
 		bigdot(map, map->x_c, map->y_c, RED);
@@ -124,7 +125,6 @@ void draw(t_map *map)
 		map->click = 0;
 		map->tmpclick = 1;
 		made_blocks(map, map->x_c, map->y_c);
-		
 	}
 	draw_nodes(map);
 	SDL_UpdateWindowSurface(map->win);

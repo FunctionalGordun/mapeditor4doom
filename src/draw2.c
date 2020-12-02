@@ -8,22 +8,28 @@ void draw_slider(t_map *map)
 	{
 		draw_img(map, &(t_info){70, 140, 25, 25}, map->inter_tex[11]);
 		draw_img(map, &(t_info){195, 140, 25, 25}, map->inter_tex[10]);
-		draw_line(map, 100, 95, 152);
-		draw_line(map, 100, 95, 153);
-		draw_line(map, 100, 95, 154);
+		draw_line(map, &(t_info){95, 152, 100, 0}, (t_color){255,255,255});
+		draw_line(map, &(t_info){95, 153, 100, 0}, (t_color){255,255,255});
+		draw_line(map, &(t_info){95, 154, 100, 0}, (t_color){255,255,255});
 		bigdot(map, 115 + (map->wclick), 153, RED);
 		fonts_classic(map, "radius", 122, 132);
 	}
 }
 
-void draw_line(t_map *map, int width, int x, int y)
+void draw_line(t_map *map, t_info *info, t_color color)
 {
 	int i;
 
 	i = -1;
-	while (++i < width)
+	if (info->h != 0)
 	{
-		draw_pixel(map, x+i, y, (t_color){255,255,255});
+		while (++i < info->h)
+			draw_pixel(map, info->x, info->y + i, color);
+	}
+	else if (info->w != 0)
+	{
+		while (++i < info->w)
+			draw_pixel(map, info->x + i, info->y, color);
 	}
 }
 

@@ -53,15 +53,192 @@ void blockterxture_click(t_map *map, int x, int y)
 		edit_blocktexture(map, 3);
 }
 
-void terxtures_click(t_map *map, int x, int y)
+void showup_lick(t_map *map, int x, int y)
 {
-	if ((x > 260 && x < 290) && y > 195 && y < 245)
+	if ((x > 260 && x < 290) && y > 205 && y < 255)
 	{
 		map->showactive = 1;
 		if (map->inter_tex[13]->active == 1)
 			map->inter_tex[13]->active = 0;
 		else
 			map->inter_tex[13]->active = 1;
+	}
+	if ((x > 260 && x < 290) && y > 370 && y < 420)
+	{
+		map->showactive = 2;
+		if (map->inter_tex[13]->active == 1)
+			map->inter_tex[13]->active = 0;
+		else
+			map->inter_tex[13]->active = 1;
+	}
+}
+
+void zerroother(t_map *map)
+{
+	int i;
+
+	i = 0;
+	while (++i < 19)
+		map->wall_tex[i]->active = 0;
+	i = 0;
+	while (++i < 13)
+		map->floorsky_tex[i]->active = 0;
+	i = 0;
+	while (++i < 4)
+		map->liquid_tex[i]->active = 0;
+}
+
+void	edit_walltexture(t_map *map, int index)
+{
+	int i;
+
+	i = 0;
+	zerroother(map);
+	while (++i < 19)
+	{
+		if (i == index)
+			map->wall_tex[i]->active = 1;
+		else
+			map->wall_tex[i]->active = 0;
+	}
+}
+
+void	edit_floortexture(t_map *map, int index)
+{
+	int i;
+
+	i = 0;
+	zerroother(map);
+	while (++i < 13)
+	{
+		if (i == index)
+			map->floorsky_tex[i]->active = 1;
+		else
+			map->floorsky_tex[i]->active = 0;
+	}
+}
+
+void	edit_liquidtexture(t_map *map, int index)
+{
+	int i;
+
+	i = 0;
+	zerroother(map);
+	while (++i < 4)
+	{
+		if (i == index)
+			map->liquid_tex[i]->active = 1;
+		else
+			map->liquid_tex[i]->active = 0;
+	}
+}
+
+void walltx_click(t_map *map, int x, int y)
+{
+	int i;
+	int x_c;
+	int y_c;
+
+	i = 0;
+	x_c = 20;
+	y_c = 170;
+	while (++i < 9)
+	{
+		if ((x > x_c && x < x_c + 50) && (y > y_c && y < y_c + 50))
+			edit_walltexture(map, i);
+		x_c += 60;
+		if (i == 4)
+		{
+			x_c = 20;
+			y_c = 230;
+		}
+	}
+	x_c = 20;
+	i = 8;
+	while (++i < 19)
+	{
+		if ((x > 320 && x < 370) && (y > x_c && y < x_c + 50))
+			edit_walltexture(map, i);
+		x_c += 80;
+	}
+}
+
+void floorskytx_click(t_map *map, int x, int y)
+{
+	int i;
+	int x_c;
+	int y_c;
+
+	i = 0;
+	x_c = 20;
+	y_c = 340;
+	while (++i < 9)
+	{
+		if ((x > x_c && x < x_c + 50) && (y > y_c && y < y_c + 50))
+			edit_floortexture(map, i);
+		x_c += 60;
+		if (i == 4)
+		{
+			x_c = 20;
+			y_c = 400;
+		}
+	}
+	x_c = 20;
+	i = 8;
+	while (++i < 13)
+	{
+		if ((x > 320 && x < 370) && (y > x_c && y < x_c + 50))
+			edit_floortexture(map, i);
+		x_c += 80;
+	}
+}
+
+void liquidtx_click(t_map *map, int x, int y)
+{
+	int i;
+	int x_c;
+	int y_c;
+
+	i = 0;
+	x_c = 20;
+	y_c = 520;
+	while (++i < 4)
+	{
+		if ((x > x_c && x < x_c + 50) && (y > y_c && y < y_c + 50))
+			edit_liquidtexture(map, i);
+		x_c += 90;
+	}
+}
+
+void terxtures_click(t_map *map, int x, int y)
+{
+	showup_lick(map, x, y);
+	walltx_click(map, x, y);
+	floorskytx_click(map, x, y);
+	liquidtx_click(map, x, y);
+}
+
+void change_texture_click(t_map *map, int x, int y)
+{
+	if ((x > WIDTH/2 - 125 && x < WIDTH/2 - 100) && (y > 50 && y < 70))
+	{
+		map->inter_tex[17]->active = 1;
+		map->inter_tex[23]->active = 0;
+	}
+	if ((x > WIDTH/2 + 120 && x < WIDTH/2 + 170) && (y > 50 && y < 70))
+	{
+		map->inter_tex[17]->active = 0;
+		map->inter_tex[23]->active = 1;
+	}
+	if ((x > WIDTH/2 - 10 && x < WIDTH/2 + 20) && (y > 3 && y < 38))
+	{
+		map->inter_tex[19]->active = 1;
+		map->inter_tex[21]->active = 0;
+	}
+	if ((x > WIDTH/2 - 10 && x < WIDTH/2 + 20) && (y > 83 && y < 118))
+	{
+		map->inter_tex[19]->active = 0;
+		map->inter_tex[21]->active = 1;
 	}
 }
 
@@ -76,4 +253,6 @@ void catch_click(t_map *map, int x, int y)
 		remove_blocks(map);
 	if (map->inter_tex[4]->active == 1)
 		terxtures_click(map, x, y);
+	if (map->inter_tex[16]->active == 1)
+		change_texture_click(map, x, y);
 }

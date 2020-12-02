@@ -80,10 +80,11 @@ typedef struct	s_removeinfo
 typedef struct	s_map
 {
 	SDL_Window			*win;
-	t_image				*inter_tex[15]; // 0 - window, 1-5 - inblock & (block, texture, object), 6-8 - tools 9-11 widget panel & widgets
+	t_image				*inter_tex[24]; // 0 - window, 1-5 - inblock & (block, texture, object), 6-8 - tools 9-11 widget panel & widgets
 	t_image				*block_tex[4]; // структура текстур раздела блоки
-	t_image				*wall_tex[21];
+	t_image				*wall_tex[20];
 	t_image				*floorsky_tex[13];
+	t_image				*liquid_tex[4];
 	t_image				*curosr_img;// структура изобр курсора
 	t_image				*font; // шрифт
 	SDL_Cursor			*cursor;// крусор
@@ -100,7 +101,11 @@ typedef struct	s_map
 	int					showactive; // флаг активности панели 1- walls 2 flor & sky 3 - liquids
 	
 
-	
+	int 				change_x;
+	int 				change_y;
+	int 				change_plus;
+	id_t				index_tex;
+	// int 				change_minus;
 }				t_map;
 
 
@@ -109,8 +114,19 @@ int		init_all(t_map *map);
 void	init_interface(t_map *map);
 void	init_texture(SDL_Surface *tex, unsigned char **s, unsigned char *pixb, int *strb);
 void	get_inter_textures(t_map *map);
-void	malloc_block_texture(t_map *map);
 void	get_block_textures(t_map *map);
+void	get_liquid_textures(t_map *map);
+void	get_wall_textures(t_map *map);
+void	get_floorsky_textures(t_map *map);
+
+
+void	malloc_block_texture(t_map *map);
+void	malloc_interface(t_map *map);
+void	malloc_floorsky_texture(t_map *map);
+void	malloc_wall_texture(t_map *map);
+void	malloc_liquid_texture(t_map *map);
+void	malloc_wall_texture(t_map *map);
+
 
 void	draw(t_map *map);
 void	draw_color(t_map *map, int pixel, t_color color);
@@ -122,9 +138,12 @@ void	draw_nodes(t_map *map);
 void	draw_node(t_map *map, t_nod *n, int inx);
 void	add_node(t_map *mp, int x, int y);
 void	draw_gr(t_map *map, int x, int y, t_color color);
-void	draw_line(t_map *map, int width, int x, int y);
+void	draw_line(t_map *map, t_info *info, t_color color);
 void	draw_slider(t_map *map);
 void	draw_block_textures(t_map *map);
+void	draw_wall_textures(t_map *map);
+void	draw_floorsky_textures(t_map *map);
+void	draw_liquid_textures(t_map *map);
 
 
 void	bigdot(t_map *map, int x, int y, t_color color);
@@ -146,6 +165,7 @@ int		mkey(int key, int x, int y, t_map *map);
 void	edit_tool(t_map *map, int index);
 void	edit_blocktexture(t_map *map, int index);
 void	wall_editor(t_map *map, int x, int y);
+void	remove_tool(t_map *map, int x, int y);
 void	find_remove(t_map *map, int x, int y);
 void	remove_blocks(t_map *map);
 
@@ -176,13 +196,11 @@ int		struppercase(char *str);
 
 
 
-
-
+void draw_showuppanel(t_map *map, int x, int y, int inx);
 void	texture_block(t_map *map);
-void	malloc_wall_texture(t_map *map);
-void	get_wall_texture(t_map *map);
+void	change_texture(t_map *map, int x, int y);
 
-void	malloc_floorsky_texture(t_map *map);
-void	get_floorsky_texture(t_map *map);
+void open_texture_win(t_map *map);
+void draw_changer_texture(t_map *map);
 
 #endif
