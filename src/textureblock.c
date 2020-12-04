@@ -126,7 +126,6 @@ void open_texture_win(t_map *map)
 {
 	if (map->inter_tex[16]->active == 1)
 	{
-
 		draw_img(map, &(t_info){WIDTH/2 - 165, 5, 330, 150}, map->inter_tex[16]);
 		(map->inter_tex[17]->active) == 1 ? draw_img(map, &(t_info){WIDTH/2 - 125, 50, 25, 25}, map->inter_tex[18]) : draw_img(map, &(t_info){WIDTH/2 - 125,50, 25, 25}, map->inter_tex[17]);
 		(map->inter_tex[23]->active) == 1 ? draw_img(map, &(t_info){WIDTH/2 + 120, 50, 25, 25}, map->inter_tex[18]) : draw_img(map, &(t_info){WIDTH/2 + 120,50, 25, 25}, map->inter_tex[23]);
@@ -142,6 +141,10 @@ void open_texture_win(t_map *map)
 		draw_line(map, &(t_info){WIDTH/2 - 100, 41, 0, 40}, (t_color){0,0,0});
 		draw_line(map, &(t_info){WIDTH/2 + 120, 40, 0, 40}, (t_color){0,0,0});
 		draw_line(map, &(t_info){WIDTH/2 + 120, 41, 0, 40}, (t_color){0,0,0});
+		draw_img(map, &(t_info){WIDTH/2 + 80, 100, 65, 30}, map->floorsky_tex[0]);
+		fonts_classic(map, "SAVE", WIDTH/2 + 90, 105);
+		draw_img(map, &(t_info){WIDTH/2 - 145, 100, 65, 30}, map->floorsky_tex[0]);
+		fonts_classic(map, "CANCEL", WIDTH/2 - 142, 105);
 		if (map->change_plus > 0)
 			draw_changer_texture(map);
 	}
@@ -175,6 +178,7 @@ void	changer(t_map *map, int x, int y)
 	{
 		map->inter_tex[16]->active = 1;
 		//draw_changer_texture(map);
+		
 	}
 	// else
 	// 	map->inter_tex[16]->active = 0;
@@ -185,19 +189,19 @@ void	get_wall_cord(t_map *map, int x, int y)
 {
 	if (map->click == 0 && interface_click(map, x, y))
 	{
+		cursor(map, "/textures/interface/firstdot.png", 0, 16);
 		map->click = 1;
 		map->change_x = x;
 		map->change_y = y;
 		find_coord(map, &(map->change_x), &(map->change_y));
-		// printf("click 1\n");
 		map->change_x -= map->z_x;
-		 map->change_y -= map->z_y;
+		map->change_y -= map->z_y;
 	}
 	else if (interface_click(map, x, y))
 	{
 		map->click = 0;
+		cursor(map, "/textures/interface/seconddot.png", 0, 16);
 		find_coord(map, &x, &y);
-		// printf("click 2\n");
 		changer(map, x - map->z_x, y - map->z_y);
 	}
 }
@@ -219,4 +223,5 @@ void	texture_block(t_map *map)
 	draw_showuppanel(map, 260, 370, 2);
 	draw_liquid_textures(map);
 	draw_small_panel_tex(map);
+	open_texture_win(map);
 }

@@ -116,7 +116,7 @@ void draw(t_map *map)
 {
 	draw_basic_interface(map);
 	whichone_tool(map);
-	open_texture_win(map);
+	// open_texture_win(map);
 
 	if (map->click)
 		bigdot(map, map->x_c, map->y_c, RED);

@@ -1,15 +1,23 @@
 #include "../include/map.h"
 
+int delete_node(t_nod *del, t_nod **first);
+
 void	find_remove(t_map *map, int x, int y)
 {
 	t_nod *tmp;
+	t_nod *first;
 
 	tmp = map->nod;
+	first = map->nod;
 	while(tmp)
 	{
-		if ((tmp->x1 + map->z_x) == x || (tmp->y1 + map->z_x) == y ||
-		(tmp->x2 + map->z_x) == x || (tmp->y2 + map->z_x) == y)
+		if (((tmp->x1 + map->z_x) == x && (tmp->y1 + map->z_y) == y) ||
+		((tmp->x2 + map->z_x) == x && (tmp->y2 + map->z_y) == y))
+		{
 			tmp->removeflag = 1;
+			//delete_node(tmp, &map->nod);
+			printf("%d\n", delete_node(tmp, &first));
+		}
 		tmp = tmp->nxt;
 	}
 }
@@ -61,10 +69,38 @@ void	wall_editor(t_map *map, int x, int y)
 	}
 }
 
+int delete_node(t_nod *del, t_nod **first)
+{
+	t_nod *t = (*first)->nxt;
+	t_nod *buf;
+	if ( *first && *first != del ) { // Если список существует, и удоляемый элемент не является первым
+		while ( t && t->nxt != del ) t = t->nxt; // Находим элемент, предшествубщий удоляемому
+		if ( t ) { // Если он существует, то удаляем
+			buf = t->nxt;
+			t->nxt = t->nxt->nxt;
+			free(buf);
+			return 0; 
+		}
+		else
+			return -1; // Иначе ошибка
+	}
+	else // Иначе
+		if (*first != del) { // Если первый
+			buf = del;
+			*first = del->nxt;
+			free(buf);
+			return 0;
+		}
+		else // Если список пуст
+			return -1;
+}
+
+
 void	remove_tool(t_map *map, int x, int y)
 {
 	int x1 = x;
 	int y1 = y;
+
 	find_coord(map, &x1, &y1);
 	if (x1 != x || y1 != y)
 		find_remove(map, x1, y1);

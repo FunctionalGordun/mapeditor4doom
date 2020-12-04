@@ -84,8 +84,8 @@ void draw_node(t_map *map, t_nod *n, int inx)
 	int diry;
 	int di;
 
-	if (!n->removeflag)
-	{
+	// if (!n->removeflag)
+	// {
 		x1 = n->x1 + map->z_x;
 		x2 = n->x2 + map->z_x;
 		if (x1 < 0 && x2 < 0)
@@ -150,7 +150,7 @@ void draw_node(t_map *map, t_nod *n, int inx)
 		}
 		bigdot(map, x1, y1, RED);
 		bigdot(map, x2, y2, RED);
-	}
+	// }
 }
 
 void draw_nodes(t_map *map)

@@ -32,6 +32,5 @@ int		pkey(int key, t_map *map)
 			draw_changer_texture(map);
 		}
 	}
-	// printf("%d\n", key);
 	return (0);
 }
