@@ -1,10 +1,14 @@
 #include "../include/map.h"
 
-int delete_node(t_nod *del, t_nod **first);
+// int delete_node(t_nod *del, t_nod **first);
+// // t_nod *deletelem(t_nod *lst, t_nod *root);
+
+int	lstdelone(t_nod **fd_lst, t_nod *fd);
 
 void	find_remove(t_map *map, int x, int y)
 {
 	t_nod *tmp;
+	t_nod *tmp2;
 	t_nod *first;
 
 	tmp = map->nod;
@@ -14,11 +18,14 @@ void	find_remove(t_map *map, int x, int y)
 		if (((tmp->x1 + map->z_x) == x && (tmp->y1 + map->z_y) == y) ||
 		((tmp->x2 + map->z_x) == x && (tmp->y2 + map->z_y) == y))
 		{
-			tmp->removeflag = 1;
-			//delete_node(tmp, &map->nod);
-			printf("%d\n", delete_node(tmp, &first));
+			tmp2 = tmp;
+			tmp = tmp->nxt;
+			if (lstdelone(&map->nod,tmp2))
+				map->nod = NULL;
 		}
-		tmp = tmp->nxt;
+		else
+			tmp = tmp->nxt;
+		
 	}
 }
 
@@ -69,32 +76,39 @@ void	wall_editor(t_map *map, int x, int y)
 	}
 }
 
-int delete_node(t_nod *del, t_nod **first)
+int	lstdelone(t_nod **fd_lst, t_nod *fd)
 {
-	t_nod *t = (*first)->nxt;
-	t_nod *buf;
-	if ( *first && *first != del ) { // Если список существует, и удоляемый элемент не является первым
-		while ( t && t->nxt != del ) t = t->nxt; // Находим элемент, предшествубщий удоляемому
-		if ( t ) { // Если он существует, то удаляем
-			buf = t->nxt;
-			t->nxt = t->nxt->nxt;
-			free(buf);
-			return 0; 
-		}
-		else
-			return -1; // Иначе ошибка
-	}
-	else // Иначе
-		if (*first != del) { // Если первый
-			buf = del;
-			*first = del->nxt;
-			free(buf);
-			return 0;
-		}
-		else // Если список пуст
-			return -1;
-}
+	t_nod *file;
+	t_nod *last;
 
+	last = 0;
+	int flag;
+	flag = 0;
+	if (!fd_lst || !fd)
+		return (0);
+	file = *fd_lst;
+	if (!(*fd_lst)->nxt)
+	{
+		flag = 1;
+	}
+	while (file)
+	{
+		if (file == fd)
+		{
+			if (last)
+				last->nxt = file->nxt;
+			else
+				*fd_lst = file->nxt;
+			free(file);
+			if (flag)
+				return (1);
+			return (0);
+		}
+		last = file;
+		file = file->nxt;
+	}
+	return (0);
+}
 
 void	remove_tool(t_map *map, int x, int y)
 {

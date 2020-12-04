@@ -20,7 +20,7 @@ int		mmove(int x, int y, t_map *map, SDL_Event event)
 }
 
 
-void	events(t_map *map)
+int	events(t_map *map)
 {
 	int x = 0;
 	int y = 0;
@@ -38,7 +38,8 @@ void	events(t_map *map)
 		{
 			SDL_GetMouseState(&x, &y);
 			mkey(event.button.button, x, y, map);
-			catch_click(map, x, y);
+			if (catch_click(map, x, y))
+				return (1);
 			draw(map);
 		}
 		if (event.type == SDL_MOUSEMOTION)
@@ -46,6 +47,6 @@ void	events(t_map *map)
 			mmove(event.motion.x, event.motion.y, map, event);
 			SDL_UpdateWindowSurface(map->win);
 		}
-		
 	}
+	return (0);
 }

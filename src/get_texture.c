@@ -28,6 +28,7 @@ void	get_inter_textures(t_map *map)
 	map->inter_tex[21]->img = IMG_Load("/textures/interface/up.png");
 	map->inter_tex[22]->img = IMG_Load("/textures/interface/upactive.png");
 	map->inter_tex[23]->img = IMG_Load("/textures/interface/dot.png");
+	map->inter_tex[24]->img = IMG_Load("/textures/interface/savebtn.png");
 }
 
 void	get_block_textures(t_map *map)

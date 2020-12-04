@@ -22,7 +22,7 @@ void remove_blocks(t_map *map)
 	int i;
 	int tmp;
 
-	i = 0;
+	i = -1;
 	if (map->block_tex[0]->active)
 		tmp = 4;
 	else if (map->block_tex[1]->active)
@@ -31,10 +31,11 @@ void remove_blocks(t_map *map)
 		tmp = 7;
 	else if (map->block_tex[3]->active)
 		tmp = 8;
-	while (i < tmp)
+	while (++i < tmp)
 	{
+		//printf("i: %d\n", i);
+		//printf("i: %d, x: %d, y: %d\n", i, map->remove->x[i], map->remove->y[i]);
 		find_remove(map, map->remove->x[i], map->remove->y[i]);
-		i++;
 	}
 }
 
@@ -65,7 +66,7 @@ void hexagon(t_map *map, int x, int y)
 	add_my_node(map, map->remove->x[2] = (x - 90) - map->wclick, map->remove->y[2] = y , (x - 60) - map->wclick, (y + 90) + map->wclick); //  \         //
 	add_my_node(map, map->remove->x[3] = (x + 90) + map->wclick, map->remove->y[3] = y, (x + 60) + map->wclick, (y - 90) - map->wclick); //            \ //
 	add_my_node(map, map->remove->x[4] = (x + 90) + map->wclick, map->remove->y[4] = y, (x + 60) + map->wclick, (y + 90) + map->wclick); //            /
-	add_my_node(map, map->remove->x[6] = (x - 60) - map->wclick, map->remove->y[5] = (y + 90) + map->wclick, (x + 60) + map->wclick, (y + 90) + map->wclick); /// 	----
+	add_my_node(map, map->remove->x[5] = (x - 60) - map->wclick, map->remove->y[5] = (y + 90) + map->wclick, (x + 60) + map->wclick, (y + 90) + map->wclick); /// 	----
 }
 
 void octagon(t_map *map, int x, int y)

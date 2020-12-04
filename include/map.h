@@ -80,7 +80,7 @@ typedef struct	s_removeinfo
 typedef struct	s_map
 {
 	SDL_Window			*win;
-	t_image				*inter_tex[24]; // 0 - window, 1-5 - inblock & (block, texture, object), 6-8 - tools 9-11 widget panel & widgets
+	t_image				*inter_tex[25]; // 0 - window, 1-5 - inblock & (block, texture, object), 6-8 - tools 9-11 widget panel & widgets
 	t_image				*block_tex[4]; // структура текстур раздела блоки
 	t_image				*wall_tex[20];
 	t_image				*floorsky_tex[13];
@@ -135,7 +135,7 @@ void	draw_point(t_map *map, int x, int y, t_color color);
 void	draw_grid(t_map *map);
 void	draw_img(t_map *map, t_info *info, t_image *st);
 void	draw_nodes(t_map *map);
-void	draw_node(t_map *map, t_nod *n, int inx);
+void draw_node(t_map *map, t_nod *n);
 void	add_node(t_map *mp, int x, int y);
 void	draw_gr(t_map *map, int x, int y, t_color color);
 void	draw_line(t_map *map, t_info *info, t_color color);
@@ -154,8 +154,7 @@ int		nod_len(t_nod *nod);
 void	whichone_tool(t_map *map);
 
 
-
-void	events(t_map *map);
+int	events(t_map *map);
 int		mmove(int x, int y, t_map *map, SDL_Event event);
 int		ukey(int key, t_map *map);
 int		pkey(int key, t_map *map);
@@ -172,7 +171,7 @@ void	remove_blocks(t_map *map);
 
 int		interface_click(t_map *map, int x, int y);
 void	section_click(t_map *map, int x, int y);
-void	catch_click(t_map *map, int x, int y);
+int		catch_click(t_map *map, int x, int y);
 int		widget_click(t_map *map, int x, int y);
 void	tools_click(t_map *map, int x, int y);
 void	blockterxture_click(t_map *map, int x, int y);

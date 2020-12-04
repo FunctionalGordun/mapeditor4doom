@@ -23,9 +23,15 @@ int widget_click(t_map *map, int x, int y)
 
 	tmp = map->wclick;
 	if ((x > 70 && x < 95) && y > 140 && y < 165)
+	{
+		map->tmpclick = 1;
 		map->wclick -= 3;
+	}
 	else if ((x > 195 && x < 220) && y > 140 && y < 165)
+	{
+		map->tmpclick = 1;
 		map->wclick += 3;
+	}
 	if (map->wclick != tmp)
 		return (0);
 	return (1);
@@ -39,6 +45,8 @@ void section_click(t_map *map, int x, int y)
 		edit_tool(map, 4);
 	else if ((x > 200 &&  x < 270) && y > 20 && y < 50)
 		edit_tool(map, 5);
+	else if ((x > 120 && x < 180) && y > 758 && y < 788)
+		map->inter_tex[24]->active = 1;
 }
 
 void blockterxture_click(t_map *map, int x, int y)
@@ -243,7 +251,7 @@ void change_texture_click(t_map *map, int x, int y)
 }
 
 
-void catch_click(t_map *map, int x, int y)
+int catch_click(t_map *map, int x, int y)
 {
 
 	section_click(map, x, y);
@@ -255,4 +263,9 @@ void catch_click(t_map *map, int x, int y)
 		terxtures_click(map, x, y);
 	if (map->inter_tex[16]->active == 1)
 		change_texture_click(map, x, y);
+	if (map->inter_tex[24]->active == 1)
+		return (1);
+	else
+		return (0);
+	
 }

@@ -5,11 +5,11 @@ void	malloc_interface(t_map *map)
 	int i;
 
 	i = -1;
-	while (++i < 24)
+	while (++i < 25)
 		map->inter_tex[i] = (t_image *)malloc(sizeof(t_image));
 	get_inter_textures(map);
 	i = 0;
-	while (++i < 24)
+	while (++i < 25)
 	{
 		map->inter_tex[i]->img = SDL_ConvertSurfaceFormat(map->inter_tex[i]->img, SDL_PIXELFORMAT_BGRA32, 0);
 		init_texture(map->inter_tex[i]->img, &(map->inter_tex[i]->s), &(map->inter_tex[i]->pixb), &(map->inter_tex[i]->strb));

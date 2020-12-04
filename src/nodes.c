@@ -66,7 +66,7 @@ void draw_gr(t_map *map, int x, int y, t_color color)
 	}
 }
 
-void draw_node(t_map *map, t_nod *n, int inx)
+void draw_node(t_map *map, t_nod *n)
 {
 	int x1;
 	int y1;
@@ -84,8 +84,8 @@ void draw_node(t_map *map, t_nod *n, int inx)
 	int diry;
 	int di;
 
-	// if (!n->removeflag)
-	// {
+	if (n)
+	{
 		x1 = n->x1 + map->z_x;
 		x2 = n->x2 + map->z_x;
 		if (x1 < 0 && x2 < 0)
@@ -150,22 +150,19 @@ void draw_node(t_map *map, t_nod *n, int inx)
 		}
 		bigdot(map, x1, y1, RED);
 		bigdot(map, x2, y2, RED);
-	// }
+	}
 }
 
 void draw_nodes(t_map *map)
 {
 	t_nod *n;
-	int i;
 
-	i = 0;
 	n = map->nod;
-	if (n == NULL)
-		return;
+	if (!n)
+		return ;
 	while (n)
 	{
-		i++;
-		draw_node(map, n, i);
+		draw_node(map, n);
 		n = n->nxt;
 	}
 }

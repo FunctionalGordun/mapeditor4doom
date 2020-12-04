@@ -80,6 +80,7 @@ void draw_basic_interface(t_map *map)
 	draw_img(map, &(t_info){80, 60, 30, 30}, map->inter_tex[6]);
 	draw_img(map, &(t_info){130, 60, 30, 30}, map->inter_tex[7]);
 	draw_img(map, &(t_info){180, 60, 30, 30}, map->inter_tex[8]);
+	draw_img(map, &(t_info){120, 758, 60, 30}, map->inter_tex[24]);
 }
 
 void draw_block_textures(t_map *map)
@@ -123,9 +124,10 @@ void draw(t_map *map)
 	if ((map->click || map->tmpclick) && (map->block_tex[0]->active || map->block_tex[1]->active || map->block_tex[2]->active || map->block_tex[3]->active))
 	{
 		map->click = 0;
-		map->tmpclick = 1;
+		map->tmpclick = 0;
 		made_blocks(map, map->x_c, map->y_c);
 	}
-	draw_nodes(map);
+	if (map->nod != NULL)
+		draw_nodes(map);
 	SDL_UpdateWindowSurface(map->win);
 }
