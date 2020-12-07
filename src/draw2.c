@@ -12,7 +12,7 @@ void draw_slider(t_map *map)
 		draw_line(map, &(t_info){95, 153, 100, 0}, (t_color){255,255,255});
 		draw_line(map, &(t_info){95, 154, 100, 0}, (t_color){255,255,255});
 		bigdot(map, 115 + (map->wclick), 153, RED);
-		fonts_classic(map, "radius", 122, 132);
+		fonts_classic(map, "radius", &(t_info){122, 132, 0, 0}, WHITEFONT);
 	}
 }
 

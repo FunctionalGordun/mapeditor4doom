@@ -14,7 +14,7 @@ int	struppercase(char *str)
 	return (0);
 }
 
-void fonts_classic(t_map *map, char *str, int x, int y)
+void fonts_classic(t_map *map, char *str, t_info *info, SDL_Color color)
 {
 	TTF_Font *font;
 	int strlen;
@@ -22,18 +22,17 @@ void fonts_classic(t_map *map, char *str, int x, int y)
 	map->font = (t_image *)malloc(sizeof(t_image));
 	strlen = ft_strlen(str);
 	TTF_Init();
-	SDL_Color White = {255, 255, 255};
 	font = TTF_OpenFont("/textures/fonts/classic.ttf", 32);
-	map->font->img = TTF_RenderText_Solid(font, str, White);
+	map->font->img = TTF_RenderText_Solid(font, str, color);
 	map->font->img = SDL_ConvertSurfaceFormat(map->font->img, SDL_PIXELFORMAT_BGRA32, 0);
 		init_texture(map->font->img,&(map->font->s), &(map->font->pixb), &(map->font->strb));
 	if (struppercase(str))
-		draw_img(map, &(t_info){x,y,strlen*10,20}, map->font);
+		draw_img(map, &(t_info){info->x,info->y,strlen*10,20}, map->font);
 	else
-		draw_img(map, &(t_info){x,y,strlen*7,15}, map->font);
+		draw_img(map, &(t_info){info->x,info->y,strlen*7,15}, map->font);
 }
 
-void fonts_doom(t_map *map, char *str, int x, int y, SDL_Color color)
+void fonts_doom(t_map *map, char *str, t_info *info, SDL_Color color)
 {
 	TTF_Font *font;
 	int strlen;
@@ -46,7 +45,7 @@ void fonts_doom(t_map *map, char *str, int x, int y, SDL_Color color)
 	map->font->img = SDL_ConvertSurfaceFormat(map->font->img, SDL_PIXELFORMAT_BGRA32, 0);
 		init_texture(map->font->img,&(map->font->s), &(map->font->pixb), &(map->font->strb));
 	if (struppercase(str))
-		draw_img(map, &(t_info){x,y,strlen*12,20}, map->font);
+		draw_img(map, &(t_info){info->x,info->y,strlen*12,20}, map->font);
 	else
-		draw_img(map, &(t_info){x,y,strlen*10,15}, map->font);
+		draw_img(map, &(t_info){info->x,info->y,strlen*10,15}, map->font);
 }

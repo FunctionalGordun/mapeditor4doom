@@ -20,6 +20,7 @@
 # define HOTPINK (t_color){255, 105, 180}
 
 # define REDFONT (SDL_Color){255, 0, 0}
+# define WHITEFONT (SDL_Color){255, 255, 255}
 
 
 # define WIDTH 1224
@@ -33,6 +34,13 @@ typedef struct		s_color
 	int				b;
 }					t_color;
 
+typedef struct			s_texinfo
+{
+	//int vector_len;
+	char *texture_name;
+	char *type_name;
+}						t_texinfo;
+
 typedef struct			s_nod
 {
 	short				x1;
@@ -40,7 +48,7 @@ typedef struct			s_nod
 	short				x2;
 	short				y2;
 	int					index;
-	int					removeflag;
+	t_texinfo			*texture;
 	struct s_nod		*nxt;
 }						t_nod;
 
@@ -80,7 +88,7 @@ typedef struct	s_removeinfo
 typedef struct	s_map
 {
 	SDL_Window			*win;
-	t_image				*inter_tex[25]; // 0 - window, 1-5 - inblock & (block, texture, object), 6-8 - tools 9-11 widget panel & widgets
+	t_image				*inter_tex[22]; // 0 - window, 1-5 - inblock & (block, texture, object), 6-8 - tools 9-11 widget panel & widgets
 	t_image				*block_tex[4]; // структура текстур раздела блоки
 	t_image				*wall_tex[20];
 	t_image				*floorsky_tex[13];
@@ -103,9 +111,9 @@ typedef struct	s_map
 
 	int 				change_x;
 	int 				change_y;
-	int 				change_plus;
 	id_t				index_tex;
-	// int 				change_minus;
+	int					validflag;
+	int					index_wall;
 }				t_map;
 
 
@@ -135,15 +143,16 @@ void	draw_point(t_map *map, int x, int y, t_color color);
 void	draw_grid(t_map *map);
 void	draw_img(t_map *map, t_info *info, t_image *st);
 void	draw_nodes(t_map *map);
-void draw_node(t_map *map, t_nod *n);
+void	draw_node(t_map *map, t_nod *n);
 void	add_node(t_map *mp, int x, int y);
 void	draw_gr(t_map *map, int x, int y, t_color color);
 void	draw_line(t_map *map, t_info *info, t_color color);
 void	draw_slider(t_map *map);
 void	draw_block_textures(t_map *map);
 void	draw_wall_textures(t_map *map);
-void	draw_floorsky_textures(t_map *map);
+void	draw_floor_textures(t_map *map);
 void	draw_liquid_textures(t_map *map);
+void	draw_sky_textures(t_map *map);
 
 
 void	bigdot(t_map *map, int x, int y, t_color color);
@@ -175,6 +184,7 @@ int		catch_click(t_map *map, int x, int y);
 int		widget_click(t_map *map, int x, int y);
 void	tools_click(t_map *map, int x, int y);
 void	blockterxture_click(t_map *map, int x, int y);
+void zerroother(t_map *map);
 
 
 void	add_my_node(t_map *map, int x1, int y1, int x2, int y2);
@@ -188,18 +198,26 @@ void	octagon(t_map *map, int x, int y);
 
 void	cursor(t_map *map, const char *file, int hot_x, int hot_y);
 void	fonts(t_map *map, char *str, int x, int y);
-void	fonts_classic(t_map *map, char *str, int x, int y);
-void fonts_doom(t_map *map, char *str, int x, int y, SDL_Color color);
+void	fonts_classic(t_map *map, char *str, t_info *info, SDL_Color color);
+void	fonts_doom(t_map *map, char *str, t_info *info, SDL_Color color);
 int		struppercase(char *str);
 
 
 
 
-void draw_showuppanel(t_map *map, int x, int y, int inx);
+void	draw_showuppanel(t_map *map, int x, int y, int inx);
 void	texture_block(t_map *map);
 void	change_texture(t_map *map, int x, int y);
+void	change_text_inter(t_map *map);
 
-void open_texture_win(t_map *map);
-void draw_changer_texture(t_map *map);
+void	open_texture_win(t_map *map);
+int draw_changer_texture(t_map *map);
+
+int check_scene(t_info *info, t_map *map);
+int		valid_map(t_map *map);
+
+
+void write_nodes(t_info *info, t_map *map);
+char **write_n(t_map *map, t_nod *n, char **arr);
 
 #endif

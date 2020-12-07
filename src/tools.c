@@ -35,7 +35,9 @@ void	edit_tool(t_map *map, int index)
 
 	i = -1;
 	edit_blocktexture(map, -1);
-	while (++i < 9)
+	zerroother(map);
+	map->inter_tex[16]->active = 0;
+	while (++i < 25)
 	{
 		if (i == index)
 			map->inter_tex[i]->active = 1;

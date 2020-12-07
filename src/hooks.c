@@ -46,7 +46,7 @@ void section_click(t_map *map, int x, int y)
 	else if ((x > 200 &&  x < 270) && y > 20 && y < 50)
 		edit_tool(map, 5);
 	else if ((x > 120 && x < 180) && y > 758 && y < 788)
-		map->inter_tex[24]->active = 1;
+		map->inter_tex[21]->active = 1;
 }
 
 void blockterxture_click(t_map *map, int x, int y)
@@ -171,7 +171,7 @@ void walltx_click(t_map *map, int x, int y)
 	}
 }
 
-void floorskytx_click(t_map *map, int x, int y)
+void floortx_click(t_map *map, int x, int y)
 {
 	int i;
 	int x_c;
@@ -191,13 +191,27 @@ void floorskytx_click(t_map *map, int x, int y)
 			y_c = 400;
 		}
 	}
-	x_c = 20;
+}
+
+void skytx_click(t_map *map, int x, int y)
+{
+	int i;
+	int x_c;
+	int y_c;
+
 	i = 8;
+	x_c = 20;
+	y_c = 520;
 	while (++i < 13)
 	{
-		if ((x > 320 && x < 370) && (y > x_c && y < x_c + 50))
+		if ((x > x_c && x < x_c + 50) && (y > y_c && y < y_c + 50))
 			edit_floortexture(map, i);
-		x_c += 80;
+		x_c += 60;
+		if (i == 4)
+		{
+			x_c = 20;
+			y_c = 400;
+		}
 	}
 }
 
@@ -209,7 +223,7 @@ void liquidtx_click(t_map *map, int x, int y)
 
 	i = 0;
 	x_c = 20;
-	y_c = 520;
+	y_c = 620;
 	while (++i < 4)
 	{
 		if ((x > x_c && x < x_c + 50) && (y > y_c && y < y_c + 50))
@@ -220,33 +234,33 @@ void liquidtx_click(t_map *map, int x, int y)
 
 void terxtures_click(t_map *map, int x, int y)
 {
+	edit_blocktexture(map, -1);
 	showup_lick(map, x, y);
 	walltx_click(map, x, y);
-	floorskytx_click(map, x, y);
+	floortx_click(map, x, y);
+	skytx_click(map, x, y);
 	liquidtx_click(map, x, y);
 }
 
 void change_texture_click(t_map *map, int x, int y)
 {
-	if ((x > WIDTH/2 - 125 && x < WIDTH/2 - 100) && (y > 50 && y < 70))
-	{
-		map->inter_tex[17]->active = 1;
-		map->inter_tex[23]->active = 0;
-	}
-	if ((x > WIDTH/2 + 120 && x < WIDTH/2 + 170) && (y > 50 && y < 70))
-	{
-		map->inter_tex[17]->active = 0;
-		map->inter_tex[23]->active = 1;
-	}
 	if ((x > WIDTH/2 - 10 && x < WIDTH/2 + 20) && (y > 3 && y < 38))
 	{
-		map->inter_tex[19]->active = 1;
-		map->inter_tex[21]->active = 0;
+		map->inter_tex[17]->active = 1;
+		map->inter_tex[19]->active = 0;
 	}
 	if ((x > WIDTH/2 - 10 && x < WIDTH/2 + 20) && (y > 83 && y < 118))
 	{
-		map->inter_tex[19]->active = 0;
-		map->inter_tex[21]->active = 1;
+		map->inter_tex[17]->active = 0;
+		map->inter_tex[19]->active = 1;
+	}
+
+	if ((x > WIDTH/2 - 145 && x < WIDTH/2 - 80) && (y > 100 && y < 130)) // cancel
+		map->inter_tex[16]->active = 0;
+	if ((x > WIDTH/2 + 80 && x < WIDTH/2 + 145) && (y > 100 && y < 130))
+	{
+		printf("save click\n");
+		map->inter_tex[16]->active = 2;
 	}
 }
 
@@ -254,16 +268,17 @@ void change_texture_click(t_map *map, int x, int y)
 int catch_click(t_map *map, int x, int y)
 {
 
-	section_click(map, x, y);
-	tools_click(map, x, y);
-	blockterxture_click(map, x, y);
-	if (!widget_click(map, x, y))
+	section_click(map, x, y); // клик по секциям
+	tools_click(map, x, y); // клик по инструментам
+	// if (!map->inter_tex[7]->active && !map->inter_tex[8]->active)
+		blockterxture_click(map, x, y); // клик готовым блокам раздела блоки
+	if (!widget_click(map, x, y))// клик по виждету размера раздела блоки
 		remove_blocks(map);
 	if (map->inter_tex[4]->active == 1)
-		terxtures_click(map, x, y);
+		terxtures_click(map, x, y); // клики в разделе тексты
 	if (map->inter_tex[16]->active == 1)
-		change_texture_click(map, x, y);
-	if (map->inter_tex[24]->active == 1)
+		change_texture_click(map, x, y); // клики по текстурам если блок текстуры активны
+	if (map->inter_tex[21]->active == 1)
 		return (1);
 	else
 		return (0);

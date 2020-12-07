@@ -80,7 +80,7 @@ void draw_basic_interface(t_map *map)
 	draw_img(map, &(t_info){80, 60, 30, 30}, map->inter_tex[6]);
 	draw_img(map, &(t_info){130, 60, 30, 30}, map->inter_tex[7]);
 	draw_img(map, &(t_info){180, 60, 30, 30}, map->inter_tex[8]);
-	draw_img(map, &(t_info){120, 758, 60, 30}, map->inter_tex[24]);
+	draw_img(map, &(t_info){120, 758, 60, 30}, map->inter_tex[21]);
 }
 
 void draw_block_textures(t_map *map)
@@ -105,11 +105,13 @@ void whichone_tool(t_map *map)
 		texture_block(map);
 	}
 	if (map->inter_tex[6]->active == 1)
-		fonts_classic(map, "edit tool", 305, 780);
+		fonts_classic(map, "edit tool", &(t_info){305, 780, 0, 0}, WHITEFONT);
 	if (map->inter_tex[7]->active == 1)
-		fonts_classic(map, "info tool", 305, 780);
+		fonts_classic(map, "info tool", &(t_info){305, 780, 0, 0}, WHITEFONT);
 	if (map->inter_tex[8]->active == 1)
-		fonts_classic(map, "remove tool", 305, 780);
+		fonts_classic(map, "remove tool", &(t_info){305, 780, 0, 0}, WHITEFONT);
+	if (map->validflag == 1)
+		fonts_classic(map, "map is not closed!", &(t_info){350, HEIGHT - 20, 0, 0}, REDFONT);
 }
 
 

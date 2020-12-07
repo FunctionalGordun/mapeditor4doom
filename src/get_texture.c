@@ -21,14 +21,11 @@ void	get_inter_textures(t_map *map)
 	map->inter_tex[14]->img = IMG_Load("/textures/interface/showdownbtn.png");
 	map->inter_tex[15]->img = IMG_Load("/textures/interface/redsquare.png");
 	map->inter_tex[16]->img = IMG_Load("/textures/interface/textureblock.png");
-	map->inter_tex[17]->img = IMG_Load("/textures/interface/dot.png");
-	map->inter_tex[18]->img = IMG_Load("/textures/interface/dotactive.png");
-	map->inter_tex[19]->img = IMG_Load("/textures/interface/down.png");
-	map->inter_tex[20]->img = IMG_Load("/textures/interface/downactive.png");
-	map->inter_tex[21]->img = IMG_Load("/textures/interface/up.png");
-	map->inter_tex[22]->img = IMG_Load("/textures/interface/upactive.png");
-	map->inter_tex[23]->img = IMG_Load("/textures/interface/dot.png");
-	map->inter_tex[24]->img = IMG_Load("/textures/interface/savebtn.png");
+	map->inter_tex[17]->img = IMG_Load("/textures/interface/down.png");
+	map->inter_tex[18]->img = IMG_Load("/textures/interface/downactive.png");
+	map->inter_tex[19]->img = IMG_Load("/textures/interface/up.png");
+	map->inter_tex[20]->img = IMG_Load("/textures/interface/upactive.png");
+	map->inter_tex[21]->img = IMG_Load("/textures/interface/savebtn.png");
 }
 
 void	get_block_textures(t_map *map)
@@ -46,14 +43,15 @@ void	get_floorsky_textures(t_map *map)
 	map->floorsky_tex[2]->img = IMG_Load("/textures/floor/floor2.png");
 	map->floorsky_tex[3]->img = IMG_Load("/textures/floor/floor3.png");
 	map->floorsky_tex[4]->img = IMG_Load("/textures/floor/floor4.png");
-	map->floorsky_tex[5]->img = IMG_Load("/textures/floor/sky1.png");
-	map->floorsky_tex[6]->img = IMG_Load("/textures/floor/sky2.png");
-	map->floorsky_tex[7]->img = IMG_Load("/textures/floor/sky3.png");
-	map->floorsky_tex[8]->img = IMG_Load("/textures/floor/sky4.png");
-	map->floorsky_tex[9]->img = IMG_Load("/textures/floor/floor5.png");
-	map->floorsky_tex[10]->img = IMG_Load("/textures/floor/floor6.png");
-	map->floorsky_tex[11]->img = IMG_Load("/textures/floor/floor7.png");
-	map->floorsky_tex[12]->img = IMG_Load("/textures/floor/floor8.png");
+	map->floorsky_tex[5]->img = IMG_Load("/textures/floor/floor5.png");
+	map->floorsky_tex[6]->img = IMG_Load("/textures/floor/floor6.png");
+	map->floorsky_tex[7]->img = IMG_Load("/textures/floor/floor7.png");
+	map->floorsky_tex[8]->img = IMG_Load("/textures/floor/floor8.png");
+	map->floorsky_tex[9]->img = IMG_Load("/textures/floor/sky1.png");
+	map->floorsky_tex[10]->img = IMG_Load("/textures/floor/sky2.png");
+	map->floorsky_tex[11]->img = IMG_Load("/textures/floor/sky3.png");
+	map->floorsky_tex[12]->img = IMG_Load("/textures/floor/sky4.png");
+
 }
 
 void	get_wall_textures(t_map *map)

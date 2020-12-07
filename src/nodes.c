@@ -21,11 +21,15 @@ t_nod	*n_cr(short x1, short y1, short x2, short y2)
 	t_nod *a;
 
 	a = (t_nod*)malloc(sizeof(t_nod));
+	a->texture = (t_texinfo*)malloc(sizeof(t_texinfo));
+	a->texture->texture_name = malloc(sizeof(char) * 100);
+	a->texture->type_name = malloc(sizeof(char) * 100);
+	a->texture->texture_name = NULL;
+	a->texture->type_name = NULL;
 	a->x1 = x1;
 	a->y1 = y1;
 	a->x2 = x2;
 	a->y2 = y2;
-	a->removeflag = 0;
 	a->nxt = NULL;
 	return (a);
 }
@@ -162,6 +166,9 @@ void draw_nodes(t_map *map)
 		return ;
 	while (n)
 	{
+		 //printf("index: %d\n", n->index);
+		if (map->inter_tex[6]->active)
+			n->texture->type_name = "wall";
 		draw_node(map, n);
 		n = n->nxt;
 	}

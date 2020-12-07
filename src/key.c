@@ -21,16 +21,16 @@ int		pkey(int key, t_map *map)
 		SDL_Quit();
 	if (map->inter_tex[16]->active == 1)
 	{
-		if (key == 80)
-		{
-			map->change_plus -= 5;
-			draw_changer_texture(map);
-		}
-		if (key == 79)
-		{
-			map->change_plus += 5;
-			draw_changer_texture(map);
-		}
+		// if (key == 80)
+		// {
+		// 	map->change_plus -= 5;
+		// 	draw_changer_texture(map);
+		// }
+		// if (key == 79)
+		// {
+		// 	map->change_plus += 5;
+		// 	draw_changer_texture(map);
+		// }
 	}
 	return (0);
 }

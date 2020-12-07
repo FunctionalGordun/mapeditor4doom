@@ -24,8 +24,10 @@ int		init_all(t_map *map)
 
 	map->change_x = 0;
 	map->change_y = 0;
-	map->change_plus = 0;
+	// map->change_plus = 0;
 	map->index_tex = -1;
+	map->validflag = 0;
+	map->index_wall = -1;
 	return (1);
 }
 
