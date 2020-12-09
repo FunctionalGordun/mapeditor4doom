@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   nodes.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: grinko <grinko@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/12/09 20:27:45 by grinko            #+#    #+#             */
+/*   Updated: 2020/12/09 20:28:52 by grinko           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/map.h"
 #include <math.h>
 
@@ -22,9 +34,15 @@ t_nod	*n_cr(short x1, short y1, short x2, short y2)
 
 	a = (t_nod*)malloc(sizeof(t_nod));
 	a->texture = (t_texinfo*)malloc(sizeof(t_texinfo));
-	a->texture->texture_name = malloc(sizeof(char) * 100);
+	a->texture->texture_name[0] = malloc(sizeof(char) * 100);
+	a->texture->texture_name[1] = malloc(sizeof(char) * 100);
+	a->texture->floor_name = malloc(sizeof(char) * 100);
+	a->texture->ceiling_name = malloc(sizeof(char) * 100);
 	a->texture->type_name = malloc(sizeof(char) * 100);
-	a->texture->texture_name = NULL;
+	a->texture->texture_name[0] = NULL;
+	a->texture->texture_name[1] = NULL;
+	a->texture->floor_name = NULL;
+	a->texture->ceiling_name = NULL;
 	a->texture->type_name = NULL;
 	a->x1 = x1;
 	a->y1 = y1;
@@ -66,7 +84,7 @@ void draw_gr(t_map *map, int x, int y, t_color color)
 	if (x < WIDTH && y < HEIGHT)
 	{
 		pixel = (x * map->inter_tex[0]->pixb) + (y * map->inter_tex[0]->strb);
-		draw_color(map, pixel, GREEN);
+		draw_color(map, pixel, color);
 	}
 }
 
@@ -168,7 +186,7 @@ void draw_nodes(t_map *map)
 	{
 		 //printf("index: %d\n", n->index);
 		if (map->inter_tex[6]->active)
-			n->texture->type_name = "wall";
+			n->texture->type_name = "w";
 		draw_node(map, n);
 		n = n->nxt;
 	}

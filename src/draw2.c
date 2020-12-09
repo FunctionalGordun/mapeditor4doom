@@ -74,3 +74,88 @@ void draw_grid(t_map *map)
 	}
 }
 
+
+
+void draw_floor_line(t_map *map, t_info *cor)
+{
+	int x1;
+	int y1;
+	int x2;
+	int y2;
+
+	int dx;
+	int dy;
+	int er;
+	int de;
+
+	int i;
+	int j;
+
+	int diry;
+	int di;
+
+		x1 = cor->x + map->z_x;
+		x2 = cor->w + map->z_x;
+		if (x1 < 0 && x2 < 0)
+			return;
+		y1 = cor->y + map->z_y;
+		y2 = cor->h + map->z_y;
+		dx = abs(x1 - x2);
+		dy = abs(y1 - y2);
+		er = 0;
+		de = dy + 1;
+		j = y1;
+		i = x1;
+		di = 0;
+		
+		if (dx > dy)
+		{
+			i = x1;
+			j = y1;
+			di = (x2 - x1) / dx;
+			diry = y2 - y1;
+			de = dy + 1;
+			if (diry > 0)
+				diry = 1;
+			if (diry < 0)
+				diry = -1;
+			
+			while (i != x2)
+			{
+				draw_gr(map, i, j, YELLOW);
+				er += de;
+				if (er >= dx + 1)
+				{
+					j += diry;
+					er = er - (dx + 1);
+				}
+				i += di;
+			}
+		}
+		else if (dy != 0)
+		{
+			i = y1;
+			j = x1;
+			di = (y2 - y1) / dy;
+			diry = x2 - x1;
+			de = dx + 1;
+			if (diry > 0)
+				diry = 1;
+			if (diry < 0)
+				diry = -1;
+			
+			while (i != y2)
+			{
+				draw_gr(map, j, i, YELLOW);
+				er += de;
+				if (er >= dy + 1)
+				{
+					j += diry;
+					er = er - (dy + 1);
+				}
+				i += di;
+			}
+		}
+		bigdot(map, x1, y1, HOTPINK);
+		bigdot(map, x2, y2, HOTPINK);
+}

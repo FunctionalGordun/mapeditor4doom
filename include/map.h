@@ -21,6 +21,7 @@
 
 # define REDFONT (SDL_Color){255, 0, 0}
 # define WHITEFONT (SDL_Color){255, 255, 255}
+# define SANBYBROWNFONT (SDL_Color){244, 164, 96}
 
 
 # define WIDTH 1224
@@ -37,8 +38,10 @@ typedef struct		s_color
 typedef struct			s_texinfo
 {
 	//int vector_len;
-	char *texture_name;
+	char *texture_name[2];
 	char *type_name;
+	char *floor_name;
+	char *ceiling_name;
 }						t_texinfo;
 
 typedef struct			s_nod
@@ -109,11 +112,17 @@ typedef struct	s_map
 	int					showactive; // флаг активности панели 1- walls 2 flor & sky 3 - liquids
 	
 
-	int 				change_x;
-	int 				change_y;
+	int					change_x;
+	int					change_y;
 	id_t				index_tex;
 	int					validflag;
 	int					index_wall;
+
+	int 				floor_x;
+	int 				floor_y;
+	int 				tmpfloor_x;
+	int 				tmpfloor_y;
+	// int					floor_active;
 }				t_map;
 
 
@@ -184,7 +193,7 @@ int		catch_click(t_map *map, int x, int y);
 int		widget_click(t_map *map, int x, int y);
 void	tools_click(t_map *map, int x, int y);
 void	blockterxture_click(t_map *map, int x, int y);
-void zerroother(t_map *map);
+void	zerroother(t_map *map);
 
 
 void	add_my_node(t_map *map, int x1, int y1, int x2, int y2);
@@ -206,18 +215,41 @@ int		struppercase(char *str);
 
 
 void	draw_showuppanel(t_map *map, int x, int y, int inx);
+void	draw_small_panel_tex(t_map *map);
+void	showtexture(t_map *map);
+void	showfloorsky(t_map *map);
+void	showupcontent(t_map *map);
+
+int		some_texture_active(t_map *map);
 void	texture_block(t_map *map);
 void	change_texture(t_map *map, int x, int y);
 void	change_text_inter(t_map *map);
-
+void	change_text_inter2(t_map *map);
+void	save_texture(t_map *map, int index, int num);
+int		find_nod(t_map *map, int x, int y);
+int		find_texture_name(char *str);
 void	open_texture_win(t_map *map);
-int draw_changer_texture(t_map *map);
+int		draw_changer_texture(t_map *map);
+void	tmp_draw2(t_map *map, int w, int i, t_nod *nod);
+void	tmp_draw(t_map *map, int index, t_nod *nod);
+void	changer(t_map *map, int x, int y);
+void	get_wall_cord(t_map *map, int x, int y);
 
-int check_scene(t_info *info, t_map *map);
+
+void	open_floor_win(t_map *map);
+void	draw_floor_line(t_map *map, t_info *cor);
+int change_floor_inter(t_map *map);
+void	flooor(t_map *map);
+void	findfloornod(t_map *map);
+void	findceilingnod(t_map *map);
+void	draw_img2(t_map *map, t_info *info, t_image *st);
+void	draw_img3(t_map *map, t_info *info, t_image *st);
+void	writedown_floor(t_map *map);
+
+
+int		check_scene(t_info *info, t_map *map);
 int		valid_map(t_map *map);
-
-
-void write_nodes(t_info *info, t_map *map);
-char **write_n(t_map *map, t_nod *n, char **arr);
+int		writedown_map(t_map *map);
+int		range_click(t_info *info, int w, int h);
 
 #endif

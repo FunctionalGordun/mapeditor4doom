@@ -28,6 +28,10 @@ int		init_all(t_map *map)
 	map->index_tex = -1;
 	map->validflag = 0;
 	map->index_wall = -1;
+	map->floor_x = -1;
+	map->floor_y = -1;
+	map->tmpfloor_x = -1;
+	map->tmpfloor_y = -1;
 	return (1);
 }
 

@@ -90,9 +90,7 @@ int	lstdelone(t_nod **fd_lst, t_nod *fd)
 		return (0);
 	file = *fd_lst;
 	if (!(*fd_lst)->nxt)
-	{
 		flag = 1;
-	}
 	while (file)
 	{
 		if (file == fd)

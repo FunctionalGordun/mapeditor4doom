@@ -57,25 +57,25 @@ void	get_floorsky_textures(t_map *map)
 void	get_wall_textures(t_map *map)
 {
 	map->wall_tex[0]->img = IMG_Load("/textures/interface/blackblock.png");
-	map->wall_tex[1]->img = IMG_Load("/textures/walls/wall0.png");
-	map->wall_tex[2]->img = IMG_Load("/textures/walls/wall1.png");
-	map->wall_tex[3]->img = IMG_Load("/textures/walls/wall2.png");
-	map->wall_tex[4]->img = IMG_Load("/textures/walls/wall3.png");
-	map->wall_tex[5]->img = IMG_Load("/textures/walls/wall4.png");
-	map->wall_tex[6]->img = IMG_Load("/textures/walls/wall5.png");
-	map->wall_tex[7]->img = IMG_Load("/textures/walls/wall6.png");
-	map->wall_tex[8]->img = IMG_Load("/textures/walls/wall7.png");
-	map->wall_tex[9]->img = IMG_Load("/textures/walls/wall8.png");
-	map->wall_tex[10]->img = IMG_Load("/textures/walls/wall9.png");
-	map->wall_tex[11]->img = IMG_Load("/textures/walls/wall10.png");
-	map->wall_tex[12]->img = IMG_Load("/textures/walls/wall11.png");
-	map->wall_tex[13]->img = IMG_Load("/textures/walls/wall12.png");
-	map->wall_tex[14]->img = IMG_Load("/textures/walls/wall13.png");
-	map->wall_tex[15]->img = IMG_Load("/textures/walls/wall14.png");
-	map->wall_tex[16]->img = IMG_Load("/textures/walls/wall15.png");
-	map->wall_tex[17]->img = IMG_Load("/textures/walls/wall16.png");
-	map->wall_tex[18]->img = IMG_Load("/textures/walls/wall17.png");
-	map->wall_tex[19]->img = IMG_Load("/textures/walls/wall18.png");
+	map->wall_tex[1]->img = IMG_Load("/textures/walls/wall1.png");
+	map->wall_tex[2]->img = IMG_Load("/textures/walls/wall2.png");
+	map->wall_tex[3]->img = IMG_Load("/textures/walls/wall3.png");
+	map->wall_tex[4]->img = IMG_Load("/textures/walls/wall4.png");
+	map->wall_tex[5]->img = IMG_Load("/textures/walls/wall5.png");
+	map->wall_tex[6]->img = IMG_Load("/textures/walls/wall6.png");
+	map->wall_tex[7]->img = IMG_Load("/textures/walls/wall7.png");
+	map->wall_tex[8]->img = IMG_Load("/textures/walls/wall8.png");
+	map->wall_tex[9]->img = IMG_Load("/textures/walls/wall9.png");
+	map->wall_tex[10]->img = IMG_Load("/textures/walls/wall10.png");
+	map->wall_tex[11]->img = IMG_Load("/textures/walls/wall11.png");
+	map->wall_tex[12]->img = IMG_Load("/textures/walls/wall12.png");
+	map->wall_tex[13]->img = IMG_Load("/textures/walls/wall13.png");
+	map->wall_tex[14]->img = IMG_Load("/textures/walls/wall14.png");
+	map->wall_tex[15]->img = IMG_Load("/textures/walls/wall15.png");
+	map->wall_tex[16]->img = IMG_Load("/textures/walls/wall16.png");
+	map->wall_tex[17]->img = IMG_Load("/textures/walls/wall17.png");
+	map->wall_tex[18]->img = IMG_Load("/textures/walls/wall18.png");
+	map->wall_tex[19]->img = IMG_Load("/textures/walls/wall19.png");
 }
 
 void	get_liquid_textures(t_map *map)
