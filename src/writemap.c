@@ -41,7 +41,7 @@ void count_write(t_map *map, int fd)
 			num_w++;
 		n = n->nxt;
 	}
-	maxlen = ft_strlen("walls: ") + ft_strlen(ft_itoa(num_w)) + ft_strlen(count_floor(map, fd)) + 2;
+	maxlen = ft_strlen("walls: ") + ft_strlen(ft_itoa(num_w)) + ft_strlen(count_floor(map, fd)) + 2; // ft_strlen(count_floor(map, fd))
 	buffer = malloc(sizeof(char *) * (maxlen));
 	buffer = "walls: ";
 	buffer = ft_strjoin(buffer, ft_itoa(num_w));
@@ -86,9 +86,10 @@ char *count_floor(t_map *map, int fd)
 		n = n->nxt;
 	}
 	i = 1;
-	buffer = malloc(sizeof(char *) * 1000);
+	buffer = malloc(sizeof(char *) * (ft_strlen(ft_itoa(num_f)) + 8));
 	while (i < 9)
 	{
+		// printf("arr%d : %d\n", i, arr[i]);
 		if (arr[i] != 0)
 			num_f++;
 		i++;

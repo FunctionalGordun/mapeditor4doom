@@ -28,7 +28,8 @@ INCLUDES = $(LIBFT_H) $(RTV1_H)
 
 SRC_DIR = src/
 SRC_FILES =		main.c draw.c draw2.c hooks.c interface_init.c nodes.c event.c key.c tools.c cursor.c blocks.c font.c \
-				textureblock.c malloc_texture.c get_texture.c draw3.c validation.c writemap.c showtexture.c
+				textureblock.c malloc_texture.c get_texture.c draw3.c validation.c writemap.c showtexture.c floor_text.c \
+				draw4.c wall_text.c ceiling_text.c
 
 OBJ_DIR = obj/
 OBJ_FILE =	$(SRC_FILES:.c=.o)

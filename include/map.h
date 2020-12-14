@@ -238,7 +238,7 @@ void	get_wall_cord(t_map *map, int x, int y);
 
 void	open_floor_win(t_map *map);
 void	draw_floor_line(t_map *map, t_info *cor);
-int change_floor_inter(t_map *map);
+int		change_floor_inter(t_map *map);
 void	flooor(t_map *map);
 void	findfloornod(t_map *map);
 void	findceilingnod(t_map *map);
@@ -251,5 +251,6 @@ int		check_scene(t_info *info, t_map *map);
 int		valid_map(t_map *map);
 int		writedown_map(t_map *map);
 int		range_click(t_info *info, int w, int h);
+void	get_floor_cord(t_map *map, int x, int y);
 
 #endif
