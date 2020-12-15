@@ -26,6 +26,47 @@ int change_floor_inter(t_map *map)
 		return (0);
 }
 
+int checknod(t_map *map, int x, int y)
+{
+	t_nod *n;
+
+	n = map->nod;
+	while (n)
+	{
+		if ((n->x1 == x && n->y1 == y) || (n->x2 == x && n->y2 == y))
+			return (1);
+		n = n->nxt;
+	}
+	return (0);
+}
+
+void	get_floor_cordi(t_map *map, int x, int y)
+{
+	if (checknod(map, x, y))
+	{
+		printf("ok\n");
+		bigdot(map, x, y, HOTPINK);
+	}
+	// if (map->click == 0 && interface_click(map, x, y))
+	// {
+	// 	map->click = 1;
+	// 	if (checknod(map, x, y))
+	// 	{
+	// 		printf("ok\n");
+	// 		bigdot(map, x, y, HOTPINK);
+	// 	}
+	// }
+	// else if (interface_click(map, x, y))
+	// {
+	// 	map->click = 0;
+	// 	if (checknod(map, x, y))
+	// 	{
+	// 		printf("ok2\n");
+	// 		bigdot(map, x, y, HOTPINK);
+	// 	}
+	// }
+}
+
 void	get_floor_cord(t_map *map, int x, int y)
 {
 	if (map->click == 0 && interface_click(map, x, y) && range_click(&(t_info){x, y, WIDTH / 2 - 115, 5}, 330, 100))
@@ -46,7 +87,7 @@ void open_floor_win(t_map *map)
 	int tmp;
 
 	tmp = 0;
-	flooor(map);
+	//flooor(map);
 	if (map->inter_tex[16]->active == 3)
 	{
 		map->validflag = change_floor_inter(map);
@@ -60,6 +101,7 @@ void open_floor_win(t_map *map)
 			findceilingnod(map);
 	}
 }
+
 
 void	flooor(t_map *map)
 {

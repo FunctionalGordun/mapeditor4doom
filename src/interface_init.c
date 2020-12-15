@@ -19,6 +19,7 @@ int		init_all(t_map *map)
 	map->click = 0;
 	map->nod = NULL;
 	map->wclick = 25;
+	map->whclick = 5;
 	map->tmpclick = 0;
 	map->showactive = 0;
 

@@ -61,12 +61,12 @@ void pentagon(t_map *map, int x, int y)
 
 void hexagon(t_map *map, int x, int y)
 {
-	add_my_node(map, map->remove->x[0] = (x - 60) - map->wclick, map->remove->y[0] = (y - 90) - map->wclick, (x + 60) + map->wclick, (y - 90) - map->wclick); ///     ----
-	add_my_node(map, map->remove->x[1] = (x - 90) - map->wclick, map->remove->y[1] = y, (x - 60) - map->wclick, (y - 90) - map->wclick); /// /
-	add_my_node(map, map->remove->x[2] = (x - 90) - map->wclick, map->remove->y[2] = y , (x - 60) - map->wclick, (y + 90) + map->wclick); //  \         //
-	add_my_node(map, map->remove->x[3] = (x + 90) + map->wclick, map->remove->y[3] = y, (x + 60) + map->wclick, (y - 90) - map->wclick); //            \ //
-	add_my_node(map, map->remove->x[4] = (x + 90) + map->wclick, map->remove->y[4] = y, (x + 60) + map->wclick, (y + 90) + map->wclick); //            /
-	add_my_node(map, map->remove->x[5] = (x - 60) - map->wclick, map->remove->y[5] = (y + 90) + map->wclick, (x + 60) + map->wclick, (y + 90) + map->wclick); /// 	----
+	add_my_node(map, map->remove->x[0] = (x - 20) - map->wclick, map->remove->y[0] = (y - 50) - map->wclick, (x + 20) + map->wclick, (y - 50) - map->wclick); ///     ----
+	add_my_node(map, map->remove->x[1] = (x - 50) - map->wclick, map->remove->y[1] = y, (x - 20) - map->wclick, (y - 50) - map->wclick); /// /
+	add_my_node(map, map->remove->x[2] = (x - 50) - map->wclick, map->remove->y[2] = y , (x - 20) - map->wclick, (y + 50) + map->wclick); //  \         //
+	add_my_node(map, map->remove->x[3] = (x + 50) + map->wclick, map->remove->y[3] = y, (x + 20) + map->wclick, (y - 50) - map->wclick); //            \ //
+	add_my_node(map, map->remove->x[4] = (x + 50) + map->wclick, map->remove->y[4] = y, (x + 20) + map->wclick, (y + 50) + map->wclick); //            /
+	add_my_node(map, map->remove->x[5] = (x - 20) - map->wclick, map->remove->y[5] = (y + 50) + map->wclick, (x + 20) + map->wclick, (y + 50) + map->wclick); /// 	----
 }
 
 void octagon(t_map *map, int x, int y)
@@ -93,15 +93,13 @@ void add_my_node(t_map *map, int x1, int y1, int x2, int y2)
 	if (map->nod == NULL)
 	{
 		map->nod = n;
-		return;
+		return ;
 	}
 	else
 	{
 		cur = map->nod;
 		while (cur->nxt)
-		{
 			cur = cur->nxt;
-		}
 		cur->nxt = n;
 	}
 }

@@ -103,6 +103,7 @@ typedef struct	s_map
 	t_removeinfo		*remove; // tmp труктура для функции удаления готовых блоков
 
 	int					wclick; // коэф + - виджета размера
+	int					whclick; // коэф + - виджета высоты
 	int					z_x; // половина окна по x
 	int					z_y; // половина окна по y
 	int					click; // клик первый раз
@@ -162,6 +163,7 @@ void	draw_wall_textures(t_map *map);
 void	draw_floor_textures(t_map *map);
 void	draw_liquid_textures(t_map *map);
 void	draw_sky_textures(t_map *map);
+void	draw_hlider(t_map *map);
 
 
 void	bigdot(t_map *map, int x, int y, t_color color);
@@ -252,5 +254,6 @@ int		valid_map(t_map *map);
 int		writedown_map(t_map *map);
 int		range_click(t_info *info, int w, int h);
 void	get_floor_cord(t_map *map, int x, int y);
+void	get_floor_cordi(t_map *map, int x, int y);
 
 #endif

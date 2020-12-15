@@ -6,8 +6,13 @@ int		mmove(int x, int y, t_map *map, SDL_Event event)
 	int y1 = y;
 	find_coord(map, &x1, &y1);
 	draw(map);
-	if (some_texture_active(map) == 2 && map->click == 1)
-		draw_floor_line(map, &(t_info){map->floor_x, map->floor_y, x - map->z_x, y - map->z_y});
+	if (some_texture_active(map) == 2)
+	{
+		if (x1 != x || y1 != y)
+			bigdot(map, x1, y1, HOTPINK);
+		//draw_floor_line(map, &(t_info){map->floor_x, map->floor_y, x - map->z_x, y - map->z_y});
+		
+	}
 	if (map->inter_tex[6]->active && interface_click(map, x, y))
 	{
 		if (x1 != x || y1 != y)
@@ -40,6 +45,7 @@ int	events(t_map *map)
 		{
 			SDL_GetMouseState(&x, &y);
 			mkey(event.button.button, x, y, map);
+			//get_floor_cordi(map, x, y);
 			if (catch_click(map, x, y))
 				return (1);
 			draw(map);

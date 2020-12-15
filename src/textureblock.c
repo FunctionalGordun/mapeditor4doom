@@ -63,8 +63,8 @@ void	change_texture(t_map *map, int x, int y)
 	wichone = some_texture_active(map);
 	if (wichone == 1)
 		get_wall_cord(map, x, y);
-	if (wichone == 2)
-		get_floor_cord(map, x, y);
+	// if (wichone == 2)
+	// 	get_floor_cordi(map, x, y);
 }
 
 

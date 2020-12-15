@@ -16,6 +16,22 @@ void draw_slider(t_map *map)
 	}
 }
 
+void draw_hlider(t_map *map)
+{
+	// draw_img(map, &(t_info){40, 120, 220, 100}, map->inter_tex[9]);
+	if (map->inter_tex[6]->active)
+	{
+		draw_img(map, &(t_info){70, 180, 25, 25}, map->inter_tex[11]);
+		draw_img(map, &(t_info){195, 180, 25, 25}, map->inter_tex[10]);
+		draw_line(map, &(t_info){95, 192, 100, 0}, (t_color){255,255,255});
+		draw_line(map, &(t_info){95, 193, 100, 0}, (t_color){255,255,255});
+		draw_line(map, &(t_info){95, 194, 100, 0}, (t_color){255,255,255});
+		// bigdot(map, 182 + (map->whclick), 193, RED);
+		fonts_classic(map, "wall height", &(t_info){102, 172, 0, 0}, WHITEFONT);
+		fonts_classic(map, ft_itoa(map->whclick), &(t_info){130, 202, 0, 0}, WHITEFONT);
+	}
+}
+
 void draw_line(t_map *map, t_info *info, t_color color)
 {
 	int i;

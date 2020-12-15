@@ -143,6 +143,8 @@ void draw_block_textures(t_map *map)
 	draw_img(map, &(t_info){165, 250, 50, 50}, map->block_tex[1]);
 	draw_img(map, &(t_info){65, 320, 50, 50}, map->block_tex[2]);
 	draw_img(map, &(t_info){165, 320, 50, 50}, map->block_tex[3]);
+	// draw_img(map, &(t_info){65, 400, 50, 50}, map->block_tex[0]);
+	
 }
 
 void whichone_tool(t_map *map)
@@ -160,7 +162,10 @@ void whichone_tool(t_map *map)
 		open_floor_win(map);
 		//draw_img2(map, &(t_info){map->floor_x + map->z_x, map->floor_y + map->z_y, abs(map->tmpfloor_x - map->floor_x), abs(map->tmpfloor_y - map->floor_y)}, map->floorsky_tex[map->index_tex]);
 	if (map->inter_tex[6]->active == 1)
+	{
 		fonts_classic(map, "edit tool", &(t_info){305, 780, 0, 0}, WHITEFONT);
+		draw_hlider(map);
+	}
 	if (map->inter_tex[7]->active == 1)
 		fonts_classic(map, "info tool", &(t_info){305, 780, 0, 0}, WHITEFONT);
 	if (map->inter_tex[8]->active == 1)

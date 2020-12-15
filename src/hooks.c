@@ -23,17 +23,25 @@ void tools_click(t_map *map, int x, int y)
 		edit_tool(map, 8);
 }
 
+void hwidget_click(t_map *map, int x, int y)
+{
+	if ((x > 70 && x < 95) && (y > 180 && y < 205) && map->whclick > 1)
+		map->whclick -= 1;
+	else if ((x > 195 && x < 220) && y > 180 && y < 205 && map->whclick < 20)
+		map->whclick += 1;
+}
+
 int widget_click(t_map *map, int x, int y)
 {
 	int tmp;
 
 	tmp = map->wclick;
-	if ((x > 70 && x < 95) && y > 140 && y < 165)
+	if ((x > 70 && x < 95) && (y > 140 && y < 165) && map->wclick > -20)
 	{
 		map->tmpclick = 1;
 		map->wclick -= 3;
 	}
-	else if ((x > 195 && x < 220) && y > 140 && y < 165)
+	else if ((x > 195 && x < 220) && (y > 140 && y < 165) && map->wclick < 76)
 	{
 		map->tmpclick = 1;
 		map->wclick += 3;
@@ -294,16 +302,38 @@ void change_floor_click(t_map *map, int x, int y)
 	}
 }
 
+void floorker(t_map *map, int x, int y)
+{
+	int x1;
+	int y1;
+
+	x1 = x;
+	y1 = y;
+	find_coord(map, &x1, &y1);
+	draw(map);
+	if (some_texture_active(map) == 2)
+	{
+		if (x1 != x || y1 != y)
+		{
+			// bigdot(map, x1, y1, HOTPINK);
+			get_floor_cordi(map, x1 - map->z_x, y1 - map->z_y);
+			
+		}
+		//draw_floor_line(map, &(t_info){map->floor_x, map->floor_y, x - map->z_x, y - map->z_y});
+		
+	}
+}
 
 int catch_click(t_map *map, int x, int y)
 {
-
 	section_click(map, x, y); // клик по секциям
 	tools_click(map, x, y); // клик по инструментам
 	// if (!map->inter_tex[7]->active && !map->inter_tex[8]->active)
 		blockterxture_click(map, x, y); // клик готовым блокам раздела блоки
 	if (!widget_click(map, x, y))// клик по виждету размера раздела блоки
 		remove_blocks(map);
+	hwidget_click(map, x, y);
+	floorker(map, x, y);
 	if (map->inter_tex[4]->active == 1)
 		terxtures_click(map, x, y); // клики в разделе тексты
 	if (map->inter_tex[16]->active == 1)
