@@ -47,13 +47,13 @@ void	changer(t_map *map, int x, int y)
 			map->inter_tex[16]->active = 1;
 		}
 	}
-	else if (some_texture_active(map) == 2)
-	{
-		map->tmpfloor_x = x;
-		map->tmpfloor_y = y;
-		map->showactive = 2;
-		map->inter_tex[16]->active = 3;
-	}
+	// else if (some_texture_active(map) == 2)
+	// {
+	// 	map->tmpfloor_x = x;
+	// 	map->tmpfloor_y = y;
+	// 	// map->showactive = 2;
+	// 	map->inter_tex[16]->active = 3;
+	// }
 }
 
 void	change_texture(t_map *map, int x, int y)

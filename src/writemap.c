@@ -56,49 +56,98 @@ void count_write(t_map *map, int fd)
 
 char *count_floor(t_map *map, int fd)
 {
-	t_nod *n;
-	char *buffer;
-	int num_f;
-	char *tmp;
-	int arr[9];
 	int i;
+	int tmp;
+	int omp;
+	char *buffer;
 
-	num_f = 0;
-	ft_izero(arr, 9);
-	n = map->nod;
-	while (n)
+	i = -1;
+	tmp = 0;
+	omp = 0;
+	while (++i < 8)
 	{
-		if (n->texture->floor_name != NULL)
-		{
-			i = 1;
-			tmp = malloc(sizeof(char *) * 1000);
-			while (i < 9)
-			{
-				tmp = ft_strjoin(ft_strjoin("floor", ft_itoa(i)), ".png");
-				if (!ft_strcmp(n->texture->floor_name, tmp))
-				{
-					arr[i]++;
-					break ;
-				}
-				i++;
-			}
-		}
-		n = n->nxt;
+		if (map->floorstr[i])
+			tmp++;
+		if (map->ceilingstr[i])
+			omp++;
 	}
-	i = 1;
-	buffer = malloc(sizeof(char *) * (ft_strlen(ft_itoa(num_f)) + 8));
-	while (i < 9)
+	// printf("tmp %d\n", tmp);
+	// if (tmp && omp)
+	// 	buffer = malloc(sizeof(char *) * (ft_strlen(ft_itoa(tmp)) + ft_strlen(ft_itoa(omp)) + 2));
+	// else if (tmp && !omp)
+	// 	buffer = malloc(sizeof(char *) * (ft_strlen(ft_itoa(tmp)) + 1));
+	// buffer = malloc(sizeof(char *) * (ft_strlen(ft_itoa(tmp)) + 1));
+	// while (i < 9)
+	// {
+	// 	// printf("arr%d : %d\n", i, arr[i]);
+	// 	if (arr[i] != 0)
+	// 		num_f++;
+	// 	i++;
+	// }
+	if (tmp)
 	{
-		// printf("arr%d : %d\n", i, arr[i]);
-		if (arr[i] != 0)
-			num_f++;
-		i++;
+		buffer = ft_strjoin("floor: ", ft_itoa(tmp));
+		buffer = ft_strjoin(buffer, "\t");
 	}
-	buffer = ft_strjoin("floor: ", ft_itoa(num_f));
-	buffer = ft_strjoin(buffer, "\t");
-	//printf("buffer: %s\n", buffer);
+	if (omp)
+	{
+		if(!tmp)
+			buffer = ft_strjoin("ceiling: ", ft_itoa(omp));
+		else
+			buffer = ft_strjoin(buffer, "ceiling: ");
+		buffer = ft_strjoin(buffer, ft_itoa(omp));
+		// buffer = ft_strjoin(buffer, "\t");
+	}
+	printf("buffer: %s|\n", buffer);
 	return (buffer);
 }
+
+
+// char *count_floor(t_map *map, int fd)
+// {
+// 	t_nod *n;
+// 	char *buffer;
+// 	int num_f;
+// 	char *tmp;
+// 	int arr[9];
+// 	int i;
+
+// 	num_f = 0;
+// 	ft_izero(arr, 9);
+// 	n = map->nod;
+// 	while (n)
+// 	{
+// 		if (n->texture->floor_name != NULL)
+// 		{
+// 			i = 1;
+// 			tmp = malloc(sizeof(char *) * 1000);
+// 			while (i < 9)
+// 			{
+// 				tmp = ft_strjoin(ft_strjoin("floor", ft_itoa(i)), ".png");
+// 				if (!ft_strcmp(n->texture->floor_name, tmp))
+// 				{
+// 					arr[i]++;
+// 					break ;
+// 				}
+// 				i++;
+// 			}
+// 		}
+// 		n = n->nxt;
+// 	}
+// 	i = 1;
+// 	buffer = malloc(sizeof(char *) * (ft_strlen(ft_itoa(num_f)) + 8));
+// 	while (i < 9)
+// 	{
+// 		// printf("arr%d : %d\n", i, arr[i]);
+// 		if (arr[i] != 0)
+// 			num_f++;
+// 		i++;
+// 	}
+// 	buffer = ft_strjoin("floor: ", ft_itoa(num_f));
+// 	buffer = ft_strjoin(buffer, "\t");
+// 	//printf("buffer: %s\n", buffer);
+// 	return (buffer);
+// }
 
 void write_walls(t_map *map, int fd)
 {

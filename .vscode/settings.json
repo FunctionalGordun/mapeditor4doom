@@ -2,6 +2,7 @@
 	"files.associations": {
 		"memory": "c",
 		"utility": "c",
-		"type_traits": "c"
+		"type_traits": "c",
+		"sstream": "c"
 	}
 }

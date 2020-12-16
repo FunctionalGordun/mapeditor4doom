@@ -9,6 +9,9 @@ void init_texture(SDL_Surface *tex, unsigned char **s, unsigned char *pixb, int 
 
 int		init_all(t_map *map)
 {
+	int i;
+
+	i = -1;
 	SDL_Init(SDL_INIT_EVERYTHING);
 	IMG_Init(IMG_INIT_JPG|IMG_INIT_PNG);
 	if (!(map->win = SDL_CreateWindow("Mapeditor", 200, 200, WIDTH, HEIGHT, SDL_WINDOW_SHOWN)))
@@ -33,6 +36,13 @@ int		init_all(t_map *map)
 	map->floor_y = -1;
 	map->tmpfloor_x = -1;
 	map->tmpfloor_y = -1;
+	map->floorstr = malloc(sizeof(char **) * 9);
+	map->ceilingstr = malloc(sizeof(char **) * 9);
+	while (++i < 8)
+	{
+		map->floorstr[i] = NULL;
+		map->ceilingstr[i] = NULL;
+	}
 	return (1);
 }
 

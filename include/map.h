@@ -123,6 +123,8 @@ typedef struct	s_map
 	int 				floor_y;
 	int 				tmpfloor_x;
 	int 				tmpfloor_y;
+	char				**floorstr;
+	char				**ceilingstr;
 	// int					floor_active;
 }				t_map;
 
