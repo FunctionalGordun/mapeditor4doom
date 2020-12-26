@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   interface_init.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: grinko <grinko@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/12/22 13:39:13 by grinko            #+#    #+#             */
+/*   Updated: 2020/12/26 16:02:24 by grinko           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/map.h"
 
 void init_texture(SDL_Surface *tex, unsigned char **s, unsigned char *pixb, int *strb)
@@ -5,6 +17,11 @@ void init_texture(SDL_Surface *tex, unsigned char **s, unsigned char *pixb, int 
 	*s = (unsigned char*)(tex->pixels);
 	*pixb = (tex->format->BytesPerPixel);
 	*strb = (tex->pitch);
+}
+
+void	init_objects(t_map *map)
+{
+	
 }
 
 int		init_all(t_map *map)
@@ -36,13 +53,15 @@ int		init_all(t_map *map)
 	map->floor_y = -1;
 	map->tmpfloor_x = -1;
 	map->tmpfloor_y = -1;
-	map->floorstr = malloc(sizeof(char **) * 9);
-	map->ceilingstr = malloc(sizeof(char **) * 9);
-	while (++i < 8)
-	{
-		map->floorstr[i] = NULL;
-		map->ceilingstr[i] = NULL;
-	}
+	map->floorstr = malloc(sizeof(char *) * 10);
+	map->ceilingstr = malloc(sizeof(char *) * 10);
+	map->floorstr = NULL;
+	map->ceilingstr = NULL;
+	// while (++i < 9)
+	// {
+	// 	map->floorstr[i] = NULL;
+	// 	map->ceilingstr[i] = NULL;
+	// }
 	return (1);
 }
 
@@ -53,4 +72,8 @@ void	init_interface(t_map *map)
 	malloc_wall_texture(map);
 	malloc_floorsky_texture(map);
 	malloc_liquid_texture(map);
+	malloc_player_texture(map);
+	malloc_enemy_texture(map);
+	malloc_gun_texture(map);
+	malloc_door_texture(map);
 }

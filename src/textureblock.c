@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   textureblock.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: grinko <grinko@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/12/22 13:39:30 by grinko            #+#    #+#             */
+/*   Updated: 2020/12/26 13:23:41 by grinko           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/map.h"
 
 int some_texture_active(t_map *map)
@@ -16,6 +28,10 @@ int some_texture_active(t_map *map)
 	while (++i < 4)
 		if (map->liquid_tex[i]->active == 1)
 			return (3);
+	i = -1;
+	while (++i < 3)
+		if (map->door_tex[i]->active == 1)
+			return (4);
 	return (0);
 }
 
@@ -47,13 +63,15 @@ void	changer(t_map *map, int x, int y)
 			map->inter_tex[16]->active = 1;
 		}
 	}
-	// else if (some_texture_active(map) == 2)
-	// {
-	// 	map->tmpfloor_x = x;
-	// 	map->tmpfloor_y = y;
-	// 	// map->showactive = 2;
-	// 	map->inter_tex[16]->active = 3;
-	// }
+	else if (some_texture_active(map) == 4)
+	{
+		tmp = find_nod(map, x, y);
+		if (tmp > 0)
+		{
+			map->index_wall = tmp;
+			map->validflag = 6;
+		}
+	}
 }
 
 void	change_texture(t_map *map, int x, int y)
@@ -63,8 +81,8 @@ void	change_texture(t_map *map, int x, int y)
 	wichone = some_texture_active(map);
 	if (wichone == 1)
 		get_wall_cord(map, x, y);
-	// if (wichone == 2)
-	// 	get_floor_cordi(map, x, y);
+	if (wichone == 4)
+		get_wall_cord(map, x, y);
 }
 
 

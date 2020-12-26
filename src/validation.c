@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   validation.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: grinko <grinko@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/12/22 13:39:36 by grinko            #+#    #+#             */
+/*   Updated: 2020/12/22 13:39:37 by grinko           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/map.h"
 
 int check_scene(t_info *info, t_map *map) // x = max_x, y = max_y, w = min_x, h = min_y
@@ -35,7 +47,6 @@ int check_scene(t_info *info, t_map *map) // x = max_x, y = max_y, w = min_x, h 
 					i++;
 				tmp = tmp->nxt;
 			}
-			printf("i: %d\n", i);
 			if (i == 8 || i == 12 || i == 11 || i == 10) // ????????????maybe
 			{
 				printf("that's cool map!\n");

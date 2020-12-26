@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   blocks.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: grinko <grinko@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/12/22 13:36:42 by grinko            #+#    #+#             */
+/*   Updated: 2020/12/22 13:45:40 by grinko           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/map.h"
 
 // void remove_square(t_map *map)
@@ -90,6 +102,7 @@ void add_my_node(t_map *map, int x1, int y1, int x2, int y2)
 
 	n = n_cr(x1 - map->z_x, y1 - map->z_y, x2 - map->z_x, y2 - map->z_y);
 	n->index = nod_len(map->nod);
+	n->wallh = map->whclick;
 	if (map->nod == NULL)
 	{
 		map->nod = n;

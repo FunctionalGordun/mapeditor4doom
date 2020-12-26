@@ -1,10 +1,5 @@
-walls: 4	floor: 1	ceiling: 1
-w 55 -195 155 -195
-w 55 -195 55 -95
-w 155 -195 155 -95
-w 55 -95 155 -95
--263 162 -263
-w -40 -263 -40 -61
-w 162 -263 162 -61
-w -40 -61 162 -61
-c -79 -163 21 -163 21 -63 -79 -63 -79 -163 floor1.png
+walls: 4	floor: 1	ceiling: 0
+w -116 -308 -16 -308 "textures/wall/wall0.png" 5 0 0
+w -116 -308 -116 -208 "textures/wall/wall0.png" 5 0 0
+w -16 -308 -16 -208 "textures/wall/wall0.png" 5 0 0
+w -116 -208 -16 -208 "textures/wall/wall0.png" 5 0 0

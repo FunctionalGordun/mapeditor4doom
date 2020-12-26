@@ -1,10 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   map.h                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: grinko <grinko@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/12/22 13:38:12 by grinko            #+#    #+#             */
+/*   Updated: 2020/12/26 16:14:41 by grinko           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MAP_H
 # define MAP_H
 
-#include "../SDL2/include/SDL2/SDL.h"
-#include "../SDL2/include/SDL2/SDL_image.h"
-#include "../SDL2/include/SDL2/SDL_ttf.h"
-# include "libft.h"
+# include "../frameworks/SDL2.framework/Headers/SDL.h"
+# include "../frameworks/SDL2_ttf.framework/Headers/SDL_ttf.h"
+# include "../frameworks/SDL2_image.framework/Headers/SDL_image.h"
+# include "../frameworks/SDL2_mixer.framework/Headers/SDL_mixer.h"
+# include "../libft/includes/libft.h"
 # include <math.h>
 # include <stdlib.h>
 # include <unistd.h>
@@ -24,8 +37,8 @@
 # define SANBYBROWNFONT (SDL_Color){244, 164, 96}
 
 
-# define WIDTH 1224
-# define HEIGHT 820
+# define WIDTH 1424
+# define HEIGHT 1020
 # define SCALE 30
 
 typedef struct		s_color
@@ -50,6 +63,9 @@ typedef struct			s_nod
 	short				y1;
 	short				x2;
 	short				y2;
+	int					wallh;
+	int					type;
+	int					grnum;
 	int					index;
 	t_texinfo			*texture;
 	struct s_nod		*nxt;
@@ -87,6 +103,20 @@ typedef struct	s_removeinfo
 	int *y;
 }				t_removeinfo;
 
+typedef struct	s_object
+{
+	char	*player;
+	char	*items[5];
+	char	**guns[3];
+	char	**enem[5];
+	char	*light;
+	char	**sdoors;
+	char	**bdoors;
+	char	**ydoors;
+	char	**rdoors;
+	char	*exit;
+}				t_object;
+
 
 typedef struct	s_map
 {
@@ -96,12 +126,16 @@ typedef struct	s_map
 	t_image				*wall_tex[20];
 	t_image				*floorsky_tex[13];
 	t_image				*liquid_tex[4];
+	t_image				*enemy_tex[5];
+	t_image				*player_tex[3];
+	t_image				*gun_tex[6];
+	t_image				*door_tex[11];
 	t_image				*curosr_img;// структура изобр курсора
 	t_image				*font; // шрифт
 	SDL_Cursor			*cursor;// крусор
 	t_nod				*nod; // все узлы на карте
 	t_removeinfo		*remove; // tmp труктура для функции удаления готовых блоков
-
+	t_object			*obj;
 	int					wclick; // коэф + - виджета размера
 	int					whclick; // коэф + - виджета высоты
 	int					z_x; // половина окна по x
@@ -123,8 +157,9 @@ typedef struct	s_map
 	int 				floor_y;
 	int 				tmpfloor_x;
 	int 				tmpfloor_y;
-	char				**floorstr;
-	char				**ceilingstr;
+	char				*floorstr;
+	char				*ceilingstr;
+	char				*temporary;
 	// int					floor_active;
 }				t_map;
 
@@ -246,9 +281,26 @@ int		change_floor_inter(t_map *map);
 void	flooor(t_map *map);
 void	findfloornod(t_map *map);
 void	findceilingnod(t_map *map);
-void	draw_img2(t_map *map, t_info *info, t_image *st);
-void	draw_img3(t_map *map, t_info *info, t_image *st);
 void	writedown_floor(t_map *map);
+
+void	objectsblock(t_map *map);
+
+void	edit_object(t_map *map, t_image **name, int n, int index);
+
+void	malloc_enemy_texture(t_map *map);
+void	get_enemy_textures(t_map *map);
+void	malloc_player_texture(t_map *map);
+void	get_player_textures(t_map *map);
+void	malloc_gun_texture(t_map *map);
+void	get_gun_textures(t_map *map);
+void	malloc_door_texture(t_map *map);
+void	get_door_textures(t_map *map);
+void	draw_player(t_map *map);
+void	draw_guns(t_map *map);
+void	draw_enemy(t_map *map);
+void	draw_door_light_exit(t_map *map);
+
+int xyround(t_map *map, int x, int y);
 
 
 int		check_scene(t_info *info, t_map *map);
